@@ -23,6 +23,7 @@ app.use('/api/wishlist', require('./routes/wishlistRoutes'));
 app.use('/api/itinerary', require('./routes/itineraryRoutes'));
 app.use('/api/checklist', require('./routes/checklistRoutes'));
 app.use('/api/emergency', require('./routes/emergencyRoutes'));
+app.use('/api/weather', require('./routes/weatherRoutes'));
 
 app.get('/', (req, res) => {
   res.send('WanderWise API is running 🏔️');
