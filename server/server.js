@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
+const currencyRoutes = require('./routes/currencyRoutes');
+
 
 dotenv.config();
 connectDB();
@@ -24,6 +26,7 @@ app.use('/api/itinerary', require('./routes/itineraryRoutes'));
 app.use('/api/checklist', require('./routes/checklistRoutes'));
 app.use('/api/emergency', require('./routes/emergencyRoutes'));
 app.use('/api/weather', require('./routes/weatherRoutes'));
+app.use('/api/currency', currencyRoutes);
 
 app.get('/', (req, res) => {
   res.send('WanderWise API is running 🏔️');
