@@ -7,6 +7,7 @@ const tripSchema = new mongoose.Schema({
   startDate: { type: Date },
   endDate: { type: Date },
   status: { type: String, enum: ['planned', 'ongoing', 'completed'], default: 'planned' },
+  reminderSent: { type: Boolean, default: false },
 }, { timestamps: true });
 
 module.exports = mongoose.model('Trip', tripSchema);

@@ -1,39 +1,56 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
+import logo from "../assets/logo/logo.png"; // ← adjust if your path differs
+import styles from "../styles/Navbar.module.css";
 
-function Navbar() {
+export default function Navbar() {
+  const navigate = useNavigate();
+  const isLoggedIn = !!localStorage.getItem("token");
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
+
   return (
-    <nav style={{
-      background: '#3D1A0E',
-      padding: '14px 32px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-    }}>
-      <Link to="/" style={{
-        fontFamily: 'Georgia, serif',
-        fontSize: '22px',
-        fontWeight: 'bold',
-        color: '#FFF8F5',
-        textDecoration: 'none',
-      }}>
-        Wander<span style={{ color: '#F0997B' }}>Wise</span>
+    <nav className={styles.navbar}>
+      {/* Logo — links home */}
+      <Link to="/" className={styles.logoLink}>
+        <span className={styles.logoChip}>
+          <img src={logo} alt="WanderWise" className={styles.logoImg} />
+        </span>
+        <span className={styles.logoText}>
+          Wander<span className={styles.logoTextAccent}>Wise</span>
+        </span>
       </Link>
 
-      <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
-        <Link to="/destinations" style={{ color: '#F0997B', textDecoration: 'none' }}>Explore</Link>
-        <Link to="/trip-planner" style={{ color: '#F0997B', textDecoration: 'none' }}>Plan</Link>
-        <Link to="/dashboard" style={{ color: '#F0997B', textDecoration: 'none' }}>Trips</Link>
-        <Link to="/login" style={{
-          background: '#D85A30',
-          color: '#FFF8F5',
-          padding: '8px 18px',
-          borderRadius: '20px',
-          textDecoration: 'none',
-          fontSize: '14px',
-        }}>Get started</Link>
+      {/* Nav links */}
+      <div className={styles.links}>
+        <Link to="/destinations" className={styles.link}>
+          Explore
+        </Link>
+        <Link to="/planner" className={styles.link}>
+          Plan
+        </Link>
+        <Link to="/dashboard" className={styles.link}>
+          Trips
+        </Link>
+        <Link to="/converter" className={styles.link}>
+          Converter
+        </Link>
+
+        {isLoggedIn ? (
+          <button className={styles.ctaBtn} onClick={handleLogout}>
+            Logout
+          </button>
+        ) : (
+          <button
+            className={styles.ctaBtn}
+            onClick={() => navigate("/register")}
+          >
+            Get started
+          </button>
+        )}
       </div>
     </nav>
   );
 }
-
-export default Navbar;

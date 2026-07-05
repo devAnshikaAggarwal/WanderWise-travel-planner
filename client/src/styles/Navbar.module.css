@@ -1,0 +1,104 @@
+/* Navbar — CSS Module */
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 40px;
+  background: var(--dark);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* ---- Logo ---- */
+
+.logoLink {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+/* Cream chip behind the logo so the PNG's background looks intentional.
+   Works with the current logo.png AND with a transparent version later. */
+.logoChip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  border-radius: var(--radius);
+  padding: 4px 8px;
+  height: 40px;
+  overflow: hidden;
+}
+
+.logoImg {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.logoText {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--bg);
+}
+
+.logoTextAccent {
+  color: var(--accent);
+}
+
+/* ---- Links ---- */
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.link {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  color: var(--bg);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.link:hover {
+  color: var(--accent);
+}
+
+.ctaBtn {
+  background: var(--brand);
+  color: var(--bg);
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 10px 22px;
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.ctaBtn:hover {
+  background: var(--primary);
+}
+
+/* ---- Mobile ---- */
+
+@media (max-width: 640px) {
+  .navbar {
+    padding: 12px 16px;
+  }
+
+  .links {
+    gap: 14px;
+  }
+
+  .logoText {
+    display: none; /* logo chip alone on small screens */
+  }
+}

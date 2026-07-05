@@ -14,6 +14,7 @@ import Checklist from './pages/Checklist';
 import Dashboard from './pages/Dashboard';
 import Emergency from './pages/Emergency';
 import Profile from './pages/Profile';
+import Converter from './pages/Converter';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/emergency" element={<Emergency />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/converter" element={<Converter />} />
       </Routes>
       <Footer />
     </BrowserRouter>
