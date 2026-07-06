@@ -1,0 +1,475 @@
+/* DestinationDetail page — CSS Module */
+
+.page {
+  min-height: 100vh;
+  background: var(--bg);
+  font-family: var(--font-body);
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: 16px;
+}
+
+.mutedText {
+  color: var(--primary);
+}
+
+.smallMuted {
+  color: var(--primary);
+  font-size: 13px;
+}
+
+/* ============ PHOTO HERO ============ */
+
+.hero {
+  position: relative;
+  height: 380px;
+  overflow: hidden;
+}
+
+.heroImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.heroFallback {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--dark), var(--primary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heroEmoji {
+  font-size: 90px;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(26, 10, 5, 0.88) 0%,
+    rgba(61, 26, 14, 0.35) 50%,
+    rgba(26, 10, 5, 0.2) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 40px 48px;
+}
+
+.heroTitle {
+  font-family: var(--font-heading);
+  font-size: 52px;
+  font-weight: 800;
+  color: var(--bg);
+  margin: 0 0 6px 0;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+.heroCountry {
+  font-size: 17px;
+  color: var(--accent);
+  margin: 0 0 14px 0;
+}
+
+.climateBadge {
+  background: rgba(255, 248, 245, 0.92);
+  color: var(--brand);
+  padding: 7px 18px;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 700;
+  backdrop-filter: blur(4px);
+}
+
+/* ============ CONTENT ============ */
+
+.content {
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+}
+
+.backBtn {
+  background: transparent;
+  color: var(--brand);
+  border: 1.5px solid var(--brand);
+  border-radius: var(--radius-pill);
+  padding: 9px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 22px;
+}
+
+.backBtn:hover {
+  background: var(--surface);
+}
+
+.wishlistMsg {
+  background: var(--surface);
+  border: 1px solid var(--accent);
+  color: #712b13;
+  padding: 11px 14px;
+  border-radius: var(--radius);
+  margin-bottom: 16px;
+  font-size: 13px;
+  animation: fadeIn 0.3s ease;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 330px;
+  gap: 26px;
+  align-items: start;
+}
+
+.mainInfo,
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* ---- Cards ---- */
+
+.card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  border: 1px solid var(--surface);
+  box-shadow: var(--shadow-card);
+}
+
+.cardTitle {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--dark);
+  margin: 0 0 16px 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--surface);
+}
+
+.description {
+  font-size: 14px;
+  color: #5f5e5a;
+  line-height: 1.8;
+  margin: 0;
+}
+
+/* ---- Gallery ---- */
+
+.galleryMain {
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.galleryImg {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  animation: fadeIn 0.4s ease;
+}
+
+.galleryThumbs {
+  display: flex;
+  gap: 10px;
+}
+
+.thumb {
+  width: 76px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  cursor: pointer;
+  border: 2.5px solid transparent;
+  opacity: 0.7;
+  transition: var(--transition);
+}
+
+.thumb:hover {
+  opacity: 1;
+}
+
+.thumbActive {
+  border-color: var(--brand);
+  opacity: 1;
+}
+
+/* ---- Info grid ---- */
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.infoItem {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.infoIcon {
+  font-size: 20px;
+  margin-top: 2px;
+}
+
+.infoLabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--primary);
+  margin: 0 0 2px 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.infoValue {
+  font-size: 14px;
+  color: var(--dark);
+  margin: 0;
+  font-weight: 500;
+}
+
+/* ---- Sidebar ---- */
+
+.sidebarText {
+  font-size: 13px;
+  color: var(--primary);
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.planBtn {
+  width: 100%;
+  background: var(--brand);
+  color: var(--bg);
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 13px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 14px rgba(216, 90, 48, 0.3);
+}
+
+.planBtn:hover {
+  background: var(--primary);
+  transform: translateY(-1px);
+}
+
+.wishlistBtn {
+  width: 100%;
+  background: transparent;
+  color: var(--brand);
+  border: 2px solid var(--brand);
+  border-radius: var(--radius-pill);
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.wishlistBtn:hover {
+  background: var(--surface);
+}
+
+.wishlistedBtn {
+  width: 100%;
+  background: var(--surface);
+  color: var(--primary);
+  border: 2px solid var(--accent);
+  border-radius: var(--radius-pill);
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: not-allowed;
+}
+
+/* ---- Tips ---- */
+
+.tipsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tip {
+  font-size: 13px;
+  color: #5f5e5a;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--surface);
+  line-height: 1.5;
+}
+
+.tip:last-child {
+  border-bottom: none;
+}
+
+/* ---- Weather ---- */
+
+.weatherBox {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.weatherTop {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.weatherIcon {
+  width: 60px;
+  height: 60px;
+}
+
+.weatherTemp {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--dark);
+  margin: 0 0 4px 0;
+}
+
+.weatherDesc {
+  font-size: 13px;
+  color: var(--primary);
+  margin: 0;
+  text-transform: capitalize;
+}
+
+.weatherDetails {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.weatherItem {
+  background: var(--bg);
+  border-radius: var(--radius);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.weatherLabel {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.weatherValue {
+  font-size: 14px;
+  color: var(--dark);
+  font-weight: 500;
+}
+
+/* ---- Map ---- */
+
+.map {
+  height: 220px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  position: relative;
+  z-index: 0; /* keep Leaflet layers inside the card's stacking context */
+}
+
+.mapCoords {
+  font-size: 11px;
+  color: var(--primary);
+  margin: 8px 0 0 0;
+  text-align: center;
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (max-width: 880px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    height: 280px;
+  }
+
+  .heroOverlay {
+    padding: 24px 20px;
+  }
+
+  .heroTitle {
+    font-size: 36px;
+  }
+
+  .content {
+    padding: 24px 16px 48px;
+  }
+
+  .infoGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- Emergency contacts card ---- */
+
+.emergencyGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.emergencyItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px;
+  background: var(--bg);
+  border-radius: var(--radius);
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: var(--transition);
+}
+
+.emergencyItem:hover {
+  border-color: var(--accent);
+  background: var(--surface);
+}
+
+.emergencyIcon {
+  font-size: 17px;
+  flex-shrink: 0;
+}
+
+.emergencyLabel {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--primary);
+  margin: 0 0 2px 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.emergencyValue {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--dark);
+  margin: 0;
+}

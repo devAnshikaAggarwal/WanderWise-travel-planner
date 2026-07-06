@@ -1,32 +1,45 @@
 :root {
   /* ---- Sunset Coral palette (exact) ---- */
-  --darkest: #1a0a05; /* Darkest */
-  --dark: #3d1a0e; /* Dark / Navbar */
-  --primary: #993c1d; /* Primary */
-  --brand: #d85a30; /* Brand */
-  --accent: #f0997b; /* Accent */
-  --surface: #faece7; /* Surface */
-  --bg: #fff8f5; /* Background */
+  --darkest: #1a0a05;
+  --dark: #3d1a0e;
+  --primary: #993c1d;
+  --brand: #d85a30;
+  --accent: #f0997b;
+  --surface: #faece7;
+  --bg: #fff8f5;
   --white: #ffffff;
 
-  /* ---- Status colors ---- */
+  /* ---- Status ---- */
   --success: #27ae60;
   --success-dark: #1a6b3c;
   --success-bg: #e8f8ef;
   --warning: #f39c12;
   --danger: #e74c3c;
 
-  /* ---- Typography ---- */
-  --font-body: Arial, sans-serif;
-  --font-heading: Georgia, serif;
+  /* ---- Typography (modern) ---- */
+  --font-heading: "Playfair Display", Georgia, serif;
+  --font-body: "Inter", Arial, sans-serif;
+
+  /* ---- Spacing scale (8px rhythm) ---- */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 16px;
+  --s-4: 24px;
+  --s-5: 32px;
+  --s-6: 48px;
+  --s-7: 64px;
+  --s-8: 96px;
 
   /* ---- Effects ---- */
   --radius: 8px;
-  --radius-lg: 12px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
   --radius-pill: 999px;
-  --shadow-card: 0 2px 12px rgba(216, 90, 48, 0.08);
-  --shadow-card-hover: 0 6px 20px rgba(216, 90, 48, 0.16);
-  --transition: all 0.2s ease;
+  --shadow-sm: 0 1px 4px rgba(61, 26, 14, 0.06);
+  --shadow-card: 0 2px 14px rgba(216, 90, 48, 0.08);
+  --shadow-card-hover: 0 10px 28px rgba(216, 90, 48, 0.18);
+  --shadow-float: 0 12px 40px rgba(61, 26, 14, 0.22);
+  --transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ---- Base reset ---- */
@@ -34,11 +47,17 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   font-family: var(--font-body);
   background: var(--bg);
   color: var(--dark);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
 }
 
 h1,
@@ -47,8 +66,94 @@ h3,
 h4 {
   font-family: var(--font-heading);
   color: var(--dark);
+  line-height: 1.2;
+}
+
+img {
+  max-width: 100%;
+  display: block;
 }
 
 button {
   transition: var(--transition);
+  font-family: var(--font-body);
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+a {
+  transition: var(--transition);
+}
+
+input,
+select,
+textarea {
+  font-family: var(--font-body);
+  transition: var(--transition);
+}
+
+/* ---- Reusable animations ---- */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Utility classes usable anywhere */
+.fadeUp {
+  animation: fadeUp 0.55s ease both;
+}
+
+.fadeIn {
+  animation: fadeIn 0.7s ease both;
+}
+
+/* ---- Custom scrollbar (subtle, on-brand) ---- */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: var(--radius-pill);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand);
+}
+
+/* ---- Text selection ---- */
+::selection {
+  background: var(--accent);
+  color: var(--darkest);
 }

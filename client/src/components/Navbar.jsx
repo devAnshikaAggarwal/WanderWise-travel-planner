@@ -1,5 +1,5 @@
-import { Link, useNavigate } from "react-router-dom";
-import logo from "../assets/logo/logo.png"; // ← adjust if your path differs
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import logo from "../assets/logo/logo.png";
 import styles from "../styles/Navbar.module.css";
 
 export default function Navbar() {
@@ -10,6 +10,9 @@ export default function Navbar() {
     localStorage.removeItem("token");
     navigate("/login");
   };
+
+  const linkClass = ({ isActive }) =>
+    isActive ? `${styles.link} ${styles.linkActive}` : styles.link;
 
   return (
     <nav className={styles.navbar}>
@@ -25,18 +28,18 @@ export default function Navbar() {
 
       {/* Nav links */}
       <div className={styles.links}>
-        <Link to="/destinations" className={styles.link}>
+        <NavLink to="/destinations" className={linkClass}>
           Explore
-        </Link>
-        <Link to="/planner" className={styles.link}>
+        </NavLink>
+        <NavLink to="/trip-planner" className={linkClass}>
           Plan
-        </Link>
-        <Link to="/dashboard" className={styles.link}>
+        </NavLink>
+        <NavLink to="/dashboard" className={linkClass}>
           Trips
-        </Link>
-        <Link to="/converter" className={styles.link}>
+        </NavLink>
+        <NavLink to="/converter" className={linkClass}>
           Converter
-        </Link>
+        </NavLink>
 
         {isLoggedIn ? (
           <button className={styles.ctaBtn} onClick={handleLogout}>

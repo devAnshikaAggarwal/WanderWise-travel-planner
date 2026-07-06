@@ -1,0 +1,452 @@
+/* Dashboard page — CSS Module */
+
+.page {
+  min-height: 100vh;
+  background: var(--bg);
+  font-family: var(--font-body);
+}
+
+/* ============ HEADER ============ */
+
+.header {
+  background: linear-gradient(
+    135deg,
+    var(--darkest),
+    var(--dark) 55%,
+    var(--primary)
+  );
+  padding: 38px 40px;
+}
+
+.headerContent {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.greeting {
+  font-family: var(--font-heading);
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--bg);
+  margin: 0 0 4px 0;
+}
+
+.subGreeting {
+  font-size: 14px;
+  color: var(--accent);
+  margin: 0;
+}
+
+.logoutBtn {
+  background: transparent;
+  color: var(--accent);
+  border: 1.5px solid var(--accent);
+  border-radius: var(--radius-pill);
+  padding: 9px 22px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.logoutBtn:hover {
+  background: rgba(240, 153, 123, 0.15);
+}
+
+/* ============ CONTENT ============ */
+
+.content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+}
+
+/* ---- Stats ---- */
+
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+.statCard {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  text-align: center;
+  border: 1px solid var(--surface);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: var(--transition);
+}
+
+.statCard:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.statNum {
+  font-family: var(--font-heading);
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--brand);
+}
+
+.statLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ---- Sections ---- */
+
+.section {
+  margin-bottom: 36px;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.sectionTitle {
+  font-family: var(--font-heading);
+  font-size: 23px;
+  font-weight: 700;
+  color: var(--dark);
+  margin: 0 0 16px 0;
+}
+
+.sectionHeader .sectionTitle {
+  margin: 0;
+}
+
+/* ---- Quick links ---- */
+
+.quickLinks {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.quickCard {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  text-align: center;
+  border: 1px solid var(--surface);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.quickCard:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: var(--accent);
+}
+
+.quickIcon {
+  font-size: 30px;
+}
+
+.quickLabel {
+  font-size: 13px;
+  color: var(--dark);
+  font-weight: 600;
+}
+
+/* ---- Buttons ---- */
+
+.newTripBtn {
+  background: var(--brand);
+  color: var(--bg);
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 11px 24px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(216, 90, 48, 0.3);
+}
+
+.newTripBtn:hover {
+  background: var(--primary);
+  transform: translateY(-1px);
+}
+
+.loadingText {
+  color: var(--primary);
+  font-size: 14px;
+}
+
+/* ---- Empty state ---- */
+
+.emptyState {
+  text-align: center;
+  padding: 64px 20px;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--surface);
+}
+
+.emptyIcon {
+  font-size: 52px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.emptyTitle {
+  font-family: var(--font-heading);
+  font-size: 21px;
+  font-weight: 700;
+  color: var(--dark);
+  margin: 0 0 8px 0;
+}
+
+.emptyText {
+  font-size: 13px;
+  color: var(--primary);
+  margin: 0 0 22px 0;
+}
+
+/* ---- Trip cards ---- */
+
+.tripsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 20px;
+}
+
+.tripCard {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  border: 1px solid var(--surface);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.tripCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.tripCardTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+  gap: 10px;
+}
+
+.tripName {
+  font-family: var(--font-heading);
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--dark);
+  margin: 0 0 4px 0;
+}
+
+.tripDest {
+  font-size: 12px;
+  color: var(--primary);
+  margin: 0;
+}
+
+.statusBadge {
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.statusPlanned {
+  background: rgba(41, 128, 185, 0.13);
+  color: #2980b9;
+}
+
+.statusOngoing {
+  background: rgba(39, 174, 96, 0.13);
+  color: var(--success);
+}
+
+.statusCompleted {
+  background: rgba(127, 140, 141, 0.15);
+  color: #7f8c8d;
+}
+
+.tripDates {
+  font-size: 12px;
+  color: #5f5e5a;
+  margin: 0 0 16px 0;
+}
+
+.tripActions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.actionBtn {
+  background: var(--surface);
+  color: var(--primary);
+  border: none;
+  border-radius: var(--radius);
+  padding: 7px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.actionBtn:hover {
+  background: var(--accent);
+  color: var(--darkest);
+}
+
+.deleteBtn {
+  background: #fcebeb;
+  color: #791f1f;
+  border: none;
+  border-radius: var(--radius);
+  padding: 7px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.deleteBtn:hover {
+  background: #f5d0d0;
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (max-width: 860px) {
+  .statsRow,
+  .quickLinks {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .header {
+    padding: 28px 20px;
+  }
+
+  .greeting {
+    font-size: 24px;
+  }
+
+  .content {
+    padding: 24px 16px 48px;
+  }
+
+  .headerContent {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ============ ENRICHED TRIP CARDS ============ */
+
+.tripCard {
+  padding: 0;
+  overflow: hidden;
+}
+
+.tripBody {
+  padding: 20px 22px 22px;
+}
+
+.tripPhotoWrap {
+  position: relative;
+  height: 150px;
+  overflow: hidden;
+}
+
+.tripPhoto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.45s ease;
+}
+
+.tripCard:hover .tripPhoto {
+  transform: scale(1.06);
+}
+
+.countdownBadge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(26, 10, 5, 0.75);
+  color: var(--bg);
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  font-weight: 700;
+  backdrop-filter: blur(4px);
+}
+
+.weatherChip {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  background: rgba(255, 248, 245, 0.92);
+  color: var(--dark);
+  padding: 3px 12px 3px 6px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 700;
+  backdrop-filter: blur(4px);
+}
+
+.weatherChipIcon {
+  width: 26px;
+  height: 26px;
+}
+
+.tripLinks {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--surface);
+}
+
+.tripLink {
+  flex: 1;
+  background: transparent;
+  color: var(--brand);
+  border: 1.5px solid var(--accent);
+  border-radius: var(--radius-pill);
+  padding: 8px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tripLink:hover {
+  background: var(--surface);
+  border-color: var(--brand);
+}

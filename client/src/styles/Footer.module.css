@@ -1,0 +1,137 @@
+/* Footer — CSS Module */
+
+.footer {
+  background: var(--darkest);
+  color: var(--bg);
+  margin-top: auto; /* sticks to bottom in flex layouts */
+}
+
+.inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 56px 24px 40px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+}
+
+/* ---- Brand column ---- */
+
+.brandCol {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.brandRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logoChip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  border-radius: var(--radius);
+  padding: 3px 6px;
+  height: 34px;
+  overflow: hidden;
+}
+
+.logoImg {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+}
+
+.brandName {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--bg);
+}
+
+.brandAccent {
+  color: var(--accent);
+}
+
+.tagline {
+  font-family: var(--font-heading);
+  font-style: italic;
+  color: var(--accent);
+  font-size: 14px;
+  margin: 0;
+}
+
+.blurb {
+  font-size: 13px;
+  color: rgba(255, 248, 245, 0.65);
+  line-height: 1.7;
+  margin: 0;
+  max-width: 300px;
+}
+
+/* ---- Link columns ---- */
+
+.linkCol {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.colTitle {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--accent);
+  margin: 0 0 6px 0;
+}
+
+.footLink {
+  color: rgba(255, 248, 245, 0.75);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.footLink:hover {
+  color: var(--accent);
+  padding-left: 4px;
+}
+
+/* ---- Bottom bar ---- */
+
+.bottomBar {
+  border-top: 1px solid rgba(240, 153, 123, 0.15);
+  padding: 18px 24px;
+  text-align: center;
+}
+
+.copyright {
+  margin: 0;
+  font-size: 12px;
+  color: rgba(255, 248, 245, 0.5);
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 860px) {
+  .inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .brandCol {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 480px) {
+  .inner {
+    grid-template-columns: 1fr;
+    padding: 40px 20px 32px;
+  }
+}

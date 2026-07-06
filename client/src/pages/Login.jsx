@@ -1,12 +1,14 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { loginUser } from '../services/authService';
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { loginUser } from "../services/authService";
+import styles from "../styles/Auth.module.css";
 
 function Login() {
   const navigate = useNavigate();
-  const [form, setForm] = useState({ email: '', password: '' });
-  const [error, setError] = useState('');
+  const [form, setForm] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -14,187 +16,112 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
     setLoading(true);
     try {
       const data = await loginUser(form.email, form.password);
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('user', JSON.stringify({ _id: data._id, name: data.name, email: data.email }));
-      navigate('/dashboard');
+      localStorage.setItem("token", data.token);
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ _id: data._id, name: data.name, email: data.email }),
+      );
+      navigate("/dashboard");
     } catch (err) {
-      setError(err.response?.data?.message || 'Login failed. Please try again.');
+      setError(
+        err.response?.data?.message || "Login failed. Please try again.",
+      );
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div style={styles.page}>
-      <div style={styles.card}>
-
-        {/* Logo */}
-        <div style={styles.logo}>
-          <span style={styles.logoText}>Wander<span style={styles.logoAccent}>Wise</span></span>
-          <p style={styles.tagline}>roam smart. go far.</p>
+    <div className={styles.page}>
+      {/* LEFT — photo panel */}
+      <div className={styles.photoPanel}>
+        <img
+          src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1200&q=80&auto=format&fit=crop"
+          alt="Traveler overlooking mountains"
+          className={styles.photo}
+        />
+        <div className={styles.photoOverlay}>
+          <h2 className={styles.photoTitle}>Welcome back, explorer.</h2>
+          <p className={styles.photoText}>
+            Your itineraries, budgets, and wishlists are right where you left
+            them.
+          </p>
         </div>
+      </div>
 
-        <h2 style={styles.title}>Welcome back</h2>
-        <p style={styles.subtitle}>Login to your account to continue planning</p>
-
-        {error && <div style={styles.error}>{error}</div>}
-
-        <form onSubmit={handleSubmit} style={styles.form}>
-          <div style={styles.field}>
-            <label style={styles.label}>Email</label>
-            <input
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              placeholder="you@example.com"
-              required
-              style={styles.input}
-            />
+      {/* RIGHT — form panel */}
+      <div className={styles.formPanel}>
+        <div className={`${styles.card} fadeUp`}>
+          <div className={styles.logo}>
+            <span className={styles.logoText}>
+              Wander<span className={styles.logoAccent}>Wise</span>
+            </span>
+            <p className={styles.tagline}>roam smart. go far.</p>
           </div>
 
-          <div style={styles.field}>
-            <label style={styles.label}>Password</label>
-            <input
-              type="password"
-              name="password"
-              value={form.password}
-              onChange={handleChange}
-              placeholder="Enter your password"
-              required
-              style={styles.input}
-            />
-          </div>
+          <h2 className={styles.title}>Welcome back</h2>
+          <p className={styles.subtitle}>
+            Login to your account to continue planning
+          </p>
 
-          <button type="submit" style={styles.button} disabled={loading}>
-            {loading ? 'Logging in...' : 'Login'}
-          </button>
-        </form>
+          {error && <div className={styles.error}>{error}</div>}
 
-        <p style={styles.footer}>
-          Don't have an account?{' '}
-          <Link to="/register" style={styles.link}>Register here</Link>
-        </p>
+          <form onSubmit={handleSubmit} className={styles.form}>
+            <div className={styles.field}>
+              <label className={styles.label}>Email</label>
+              <input
+                type="email"
+                name="email"
+                value={form.email}
+                onChange={handleChange}
+                placeholder="you@example.com"
+                required
+                className={styles.input}
+              />
+            </div>
+
+            <div className={styles.field}>
+              <label className={styles.label}>Password</label>
+              <div className={styles.passwordWrap}>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  value={form.password}
+                  onChange={handleChange}
+                  placeholder="Enter your password"
+                  required
+                  className={styles.input}
+                />
+                <button
+                  type="button"
+                  className={styles.eyeBtn}
+                  onClick={() => setShowPassword(!showPassword)}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? "🙈" : "👁️"}
+                </button>
+              </div>
+            </div>
+
+            <button type="submit" className={styles.button} disabled={loading}>
+              {loading ? "Logging in..." : "Login"}
+            </button>
+          </form>
+
+          <p className={styles.footer}>
+            Don't have an account?{" "}
+            <Link to="/register" className={styles.link}>
+              Register here
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );
 }
-
-const styles = {
-  page: {
-    minHeight: '100vh',
-    background: '#FFF8F5',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: '20px',
-  },
-  card: {
-    background: '#FFFFFF',
-    borderRadius: '16px',
-    padding: '40px',
-    width: '100%',
-    maxWidth: '420px',
-    boxShadow: '0 4px 24px rgba(216,90,48,0.10)',
-    border: '1px solid #FAECE7',
-  },
-  logo: {
-    textAlign: 'center',
-    marginBottom: '24px',
-  },
-  logoText: {
-    fontFamily: 'Georgia, serif',
-    fontSize: '28px',
-    fontWeight: 'bold',
-    color: '#3D1A0E',
-  },
-  logoAccent: {
-    color: '#D85A30',
-  },
-  tagline: {
-    fontFamily: 'Arial, sans-serif',
-    fontSize: '11px',
-    color: '#993C1D',
-    letterSpacing: '3px',
-    margin: '4px 0 0 0',
-  },
-  title: {
-    fontFamily: 'Georgia, serif',
-    fontSize: '22px',
-    color: '#3D1A0E',
-    margin: '0 0 6px 0',
-    textAlign: 'center',
-  },
-  subtitle: {
-    fontFamily: 'Arial, sans-serif',
-    fontSize: '13px',
-    color: '#993C1D',
-    textAlign: 'center',
-    margin: '0 0 24px 0',
-  },
-  error: {
-    background: '#FAECE7',
-    border: '1px solid #F0997B',
-    color: '#712B13',
-    padding: '10px 14px',
-    borderRadius: '8px',
-    fontSize: '13px',
-    marginBottom: '16px',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '16px',
-  },
-  field: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '6px',
-  },
-  label: {
-    fontFamily: 'Arial, sans-serif',
-    fontSize: '13px',
-    fontWeight: '500',
-    color: '#3D1A0E',
-  },
-  input: {
-    padding: '10px 14px',
-    borderRadius: '8px',
-    border: '1.5px solid #F0997B',
-    fontSize: '14px',
-    fontFamily: 'Arial, sans-serif',
-    color: '#3D1A0E',
-    background: '#FFF8F5',
-    outline: 'none',
-  },
-  button: {
-    background: '#D85A30',
-    color: '#FFF8F5',
-    border: 'none',
-    borderRadius: '8px',
-    padding: '12px',
-    fontSize: '15px',
-    fontFamily: 'Georgia, serif',
-    fontWeight: 'bold',
-    cursor: 'pointer',
-    marginTop: '8px',
-  },
-  footer: {
-    textAlign: 'center',
-    fontFamily: 'Arial, sans-serif',
-    fontSize: '13px',
-    color: '#993C1D',
-    marginTop: '20px',
-  },
-  link: {
-    color: '#D85A30',
-    fontWeight: 'bold',
-    textDecoration: 'none',
-  },
-};
 
 export default Login;

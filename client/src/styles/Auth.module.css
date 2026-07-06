@@ -1,0 +1,260 @@
+/* Auth pages (Login + Register) — shared CSS Module */
+
+.page {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: calc(100vh - 70px); /* minus navbar */
+  background: var(--bg);
+}
+
+/* ============ LEFT: PHOTO PANEL ============ */
+
+.photoPanel {
+  position: relative;
+  overflow: hidden;
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photoOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(26, 10, 5, 0.85) 0%,
+    rgba(61, 26, 14, 0.35) 45%,
+    rgba(26, 10, 5, 0.15) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 48px;
+}
+
+.photoTitle {
+  font-family: var(--font-heading);
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--bg);
+  margin: 0 0 10px 0;
+}
+
+.photoText {
+  font-size: 15px;
+  color: var(--surface);
+  line-height: 1.7;
+  margin: 0;
+  max-width: 400px;
+}
+
+/* ============ RIGHT: FORM PANEL ============ */
+
+.formPanel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+}
+
+.card {
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  padding: 40px;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--surface);
+}
+
+/* ---- Logo ---- */
+
+.logo {
+  text-align: center;
+  margin-bottom: 26px;
+}
+
+.logoText {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.logoAccent {
+  color: var(--brand);
+}
+
+.tagline {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--primary);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin: 4px 0 0 0;
+}
+
+/* ---- Headings ---- */
+
+.title {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--dark);
+  margin: 0 0 6px 0;
+  text-align: center;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: var(--primary);
+  text-align: center;
+  margin: 0 0 26px 0;
+}
+
+/* ---- Messages ---- */
+
+.error {
+  background: var(--surface);
+  border: 1px solid var(--accent);
+  color: #712b13;
+  padding: 11px 14px;
+  border-radius: var(--radius);
+  font-size: 13px;
+  margin-bottom: 16px;
+  animation: fadeIn 0.3s ease;
+}
+
+/* ---- Form ---- */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--dark);
+}
+
+.input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--accent);
+  font-size: 14px;
+  color: var(--dark);
+  background: var(--bg);
+  outline: none;
+}
+
+.input:focus {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(216, 90, 48, 0.15);
+  background: var(--white);
+}
+
+.input::placeholder {
+  color: var(--primary);
+  opacity: 0.5;
+}
+
+/* ---- Password with eye toggle ---- */
+
+.passwordWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.passwordWrap .input {
+  padding-right: 46px;
+}
+
+.eyeBtn {
+  position: absolute;
+  right: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px;
+  line-height: 1;
+}
+
+/* ---- Submit button ---- */
+
+.button {
+  background: var(--brand);
+  color: var(--bg);
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 8px;
+  box-shadow: 0 4px 14px rgba(216, 90, 48, 0.3);
+}
+
+.button:hover:not(:disabled) {
+  background: var(--primary);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(216, 90, 48, 0.4);
+}
+
+.button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* ---- Footer link ---- */
+
+.footer {
+  text-align: center;
+  font-size: 13px;
+  color: var(--primary);
+  margin-top: 22px;
+}
+
+.link {
+  color: var(--brand);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (max-width: 880px) {
+  .page {
+    grid-template-columns: 1fr;
+  }
+
+  /* Hide the photo panel on mobile — form takes full width */
+  .photoPanel {
+    display: none;
+  }
+
+  .formPanel {
+    padding: 32px 16px;
+  }
+
+  .card {
+    padding: 30px 22px;
+  }
+}

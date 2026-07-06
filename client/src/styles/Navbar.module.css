@@ -4,11 +4,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 40px;
+  padding: 14px 48px;
   background: var(--dark);
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 1100; /* above Leaflet map panes (~400-1000) */
+  box-shadow: 0 2px 16px rgba(26, 10, 5, 0.35);
 }
 
 /* ---- Logo ---- */
@@ -20,8 +21,6 @@
   text-decoration: none;
 }
 
-/* Cream chip behind the logo so the PNG's background looks intentional.
-   Works with the current logo.png AND with a transparent version later. */
 .logoChip {
   display: flex;
   align-items: center;
@@ -31,6 +30,11 @@
   padding: 4px 8px;
   height: 40px;
   overflow: hidden;
+  transition: var(--transition);
+}
+
+.logoLink:hover .logoChip {
+  transform: rotate(-3deg) scale(1.05);
 }
 
 .logoImg {
@@ -43,8 +47,9 @@
 .logoText {
   font-family: var(--font-heading);
   font-size: 24px;
-  font-weight: bold;
+  font-weight: 700;
   color: var(--bg);
+  letter-spacing: 0.3px;
 }
 
 .logoTextAccent {
@@ -56,19 +61,46 @@
 .links {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 32px;
 }
 
 .link {
-  font-family: var(--font-heading);
-  font-size: 16px;
+  position: relative;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
   color: var(--bg);
   text-decoration: none;
-  transition: var(--transition);
+  padding: 4px 0;
+}
+
+/* Animated underline */
+.link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  border-radius: var(--radius-pill);
+  transition: width 0.25s ease;
 }
 
 .link:hover {
   color: var(--accent);
+}
+
+.link:hover::after {
+  width: 100%;
+}
+
+.linkActive {
+  color: var(--accent);
+}
+
+.linkActive::after {
+  width: 100%;
 }
 
 .ctaBtn {
@@ -76,29 +108,40 @@
   color: var(--bg);
   border: none;
   border-radius: var(--radius-pill);
-  padding: 10px 22px;
-  font-family: var(--font-heading);
-  font-size: 15px;
-  font-weight: bold;
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
+  box-shadow: 0 4px 14px rgba(216, 90, 48, 0.35);
 }
 
 .ctaBtn:hover {
   background: var(--primary);
+  box-shadow: 0 6px 20px rgba(216, 90, 48, 0.5);
+  transform: translateY(-1px);
 }
 
 /* ---- Mobile ---- */
 
-@media (max-width: 640px) {
+@media (max-width: 720px) {
   .navbar {
-    padding: 12px 16px;
+    padding: 10px 16px;
   }
 
   .links {
-    gap: 14px;
+    gap: 16px;
+  }
+
+  .link {
+    font-size: 13px;
+  }
+
+  .ctaBtn {
+    padding: 8px 16px;
+    font-size: 13px;
   }
 
   .logoText {
-    display: none; /* logo chip alone on small screens */
+    display: none;
   }
 }

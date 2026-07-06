@@ -1,0 +1,246 @@
+/* Emergency page — CSS Module */
+
+.page {
+  min-height: 100vh;
+  background: var(--bg);
+  font-family: var(--font-body);
+}
+
+/* ============ HEADER ============ */
+
+.header {
+  background: linear-gradient(
+    135deg,
+    var(--darkest),
+    var(--dark) 45%,
+    var(--primary)
+  );
+  padding: 56px 40px 44px;
+  text-align: center;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--bg);
+  margin: 0 0 8px 0;
+}
+
+.subtitle {
+  font-size: 15px;
+  color: var(--accent);
+  margin: 0 0 28px 0;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.countrySelect {
+  padding: 12px 18px;
+  border-radius: var(--radius-pill);
+  border: none;
+  font-size: 14px;
+  background: var(--bg);
+  color: var(--dark);
+  outline: none;
+  cursor: pointer;
+  min-width: 260px;
+  box-shadow: var(--shadow-float);
+}
+
+.searchForm {
+  display: flex;
+  gap: 8px;
+  max-width: 440px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.searchInput {
+  flex: 1;
+  min-width: 200px;
+  padding: 11px 18px;
+  border-radius: var(--radius-pill);
+  border: none;
+  font-size: 14px;
+  outline: none;
+  background: var(--bg);
+  color: var(--dark);
+}
+
+.searchInput:focus {
+  box-shadow: 0 0 0 3px rgba(240, 153, 123, 0.4);
+}
+
+.searchBtn {
+  padding: 11px 22px;
+  background: var(--brand);
+  color: var(--bg);
+  border: none;
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.searchBtn:hover {
+  background: var(--primary);
+}
+
+.clearBtn {
+  padding: 11px 16px;
+  background: transparent;
+  color: var(--accent);
+  border: 1.5px solid var(--accent);
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* ============ CONTENT ============ */
+
+.content {
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+}
+
+.warningBox {
+  background: #fff3cd;
+  border: 1px solid var(--warning);
+  color: #856404;
+  padding: 13px 16px;
+  border-radius: var(--radius);
+  font-size: 13px;
+  margin-bottom: 26px;
+}
+
+.loadingText {
+  color: var(--primary);
+}
+
+.empty {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.emptyText {
+  color: var(--primary);
+  font-size: 15px;
+  margin-bottom: 18px;
+}
+
+/* ============ CARDS ============ */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 22px;
+}
+
+.card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  border: 1px solid var(--surface);
+  box-shadow: var(--shadow-card);
+  transition: var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--surface);
+}
+
+.flag {
+  font-size: 26px;
+}
+
+.country {
+  font-family: var(--font-heading);
+  font-size: 21px;
+  font-weight: 700;
+  color: var(--dark);
+  margin: 0;
+}
+
+.numbers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* Each number is a tap-to-call link */
+.numberItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 11px;
+  background: var(--bg);
+  border-radius: var(--radius);
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: var(--transition);
+}
+
+.numberItem:hover {
+  border-color: var(--accent);
+  background: var(--surface);
+  transform: translateY(-2px);
+}
+
+.numberIcon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.numberLabel {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--primary);
+  margin: 0 0 2px 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.numberValue {
+  font-family: var(--font-heading);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--dark);
+  margin: 0;
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (max-width: 720px) {
+  .header {
+    padding: 40px 20px 32px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .content {
+    padding: 24px 16px 48px;
+  }
+
+  .numbers {
+    grid-template-columns: 1fr;
+  }
+}
