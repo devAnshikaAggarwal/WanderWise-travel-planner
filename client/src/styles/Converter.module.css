@@ -1,0 +1,92 @@
+/* Converter page — CSS Module */
+
+.page {
+  min-height: 100vh;
+  background: var(--bg);
+  font-family: var(--font-body);
+}
+
+.header {
+  background: linear-gradient(
+    135deg,
+    var(--darkest),
+    var(--dark) 45%,
+    var(--primary)
+  );
+  padding: 56px 40px;
+  text-align: center;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--bg);
+  margin: 0 0 8px 0;
+}
+
+.subtitle {
+  font-size: 15px;
+  color: var(--accent);
+  margin: 0;
+}
+
+.content {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 48px 24px 64px;
+  display: grid;
+  grid-template-columns: 440px 1fr;
+  gap: 36px;
+  align-items: start;
+  justify-content: center;
+}
+
+.tips {
+  background: var(--white);
+  border: 1px solid var(--surface);
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  box-shadow: var(--shadow-sm);
+}
+
+.tipsTitle {
+  font-family: var(--font-heading);
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--dark);
+  margin: 0 0 16px 0;
+}
+
+.tipsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tip {
+  font-size: 14px;
+  color: #5f5e5a;
+  line-height: 1.6;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--surface);
+}
+
+.tip:last-child {
+  border-bottom: none;
+}
+
+@media (max-width: 880px) {
+  .content {
+    grid-template-columns: 1fr;
+    padding: 32px 16px 48px;
+  }
+
+  .header {
+    padding: 40px 20px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+}

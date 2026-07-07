@@ -1,0 +1,200 @@
+/* Profile page — CSS Module */
+
+.page {
+  min-height: 100vh;
+  background: var(--bg);
+  font-family: var(--font-body);
+}
+
+.header {
+  background: linear-gradient(
+    135deg,
+    var(--darkest),
+    var(--dark) 45%,
+    var(--primary)
+  );
+  padding: 56px 40px 48px;
+  text-align: center;
+}
+
+.avatar {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: var(--brand);
+  color: var(--bg);
+  font-family: var(--font-heading);
+  font-size: 40px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  box-shadow: 0 6px 20px rgba(216, 90, 48, 0.45);
+  border: 3px solid var(--bg);
+}
+
+.name {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--bg);
+  margin: 0 0 4px 0;
+}
+
+.email {
+  font-size: 14px;
+  color: var(--accent);
+  margin: 0;
+}
+
+.content {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+}
+
+/* ---- Stats ---- */
+
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.statCard {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  text-align: center;
+  border: 1px solid var(--surface);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.statNum {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--brand);
+}
+
+.statLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ---- Grid ---- */
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  align-items: start;
+}
+
+.card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 26px;
+  border: 1px solid var(--surface);
+  box-shadow: var(--shadow-card);
+}
+
+.cardTitle {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--dark);
+  margin: 0 0 18px 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--surface);
+}
+
+/* ---- Account details ---- */
+
+.detailRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--surface);
+}
+
+.detailLabel {
+  font-size: 13px;
+  color: var(--primary);
+  font-weight: 500;
+}
+
+.detailValue {
+  font-size: 14px;
+  color: var(--dark);
+  font-weight: 600;
+}
+
+.logoutBtn {
+  width: 100%;
+  margin-top: 20px;
+  background: transparent;
+  color: var(--danger);
+  border: 1.5px solid var(--danger);
+  border-radius: var(--radius-pill);
+  padding: 11px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.logoutBtn:hover {
+  background: rgba(231, 76, 60, 0.08);
+}
+
+/* ---- Shortcuts ---- */
+
+.shortcuts {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.shortcut {
+  width: 100%;
+  text-align: left;
+  background: var(--bg);
+  color: var(--dark);
+  border: 1px solid var(--surface);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.shortcut:hover {
+  background: var(--surface);
+  border-color: var(--accent);
+  transform: translateX(4px);
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 720px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .header {
+    padding: 40px 20px 36px;
+  }
+
+  .content {
+    padding: 24px 16px 48px;
+  }
+}

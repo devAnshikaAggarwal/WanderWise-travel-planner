@@ -31,7 +31,7 @@ export default function Footer() {
           <Link to="/destinations" className={styles.footLink}>
             Destinations
           </Link>
-          <Link to="/planner" className={styles.footLink}>
+          <Link to="/trip-planner" className={styles.footLink}>
             Trip Planner
           </Link>
           <Link to="/wishlist" className={styles.footLink}>

@@ -252,6 +252,126 @@ function DestinationDetail() {
                 )}
               </div>
             </div>
+
+            {/* Weather + Emergency side by side */}
+            <div className={styles.duoGrid}>
+              {/* Weather Card */}
+              <div className={styles.card}>
+                <h2 className={styles.cardTitle}>Current Weather</h2>
+                {weatherLoading && (
+                  <p className={styles.smallMuted}>Loading weather...</p>
+                )}
+                {weather && (
+                  <div className={styles.weatherBox}>
+                    <div className={styles.weatherTop}>
+                      <img
+                        src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
+                        alt={weather.description}
+                        className={styles.weatherIcon}
+                      />
+                      <div>
+                        <p className={styles.weatherTemp}>
+                          {weather.temperature}°C
+                        </p>
+                        <p className={styles.weatherDesc}>
+                          {weather.description}
+                        </p>
+                      </div>
+                    </div>
+                    <div className={styles.weatherDetails}>
+                      <div className={styles.weatherItem}>
+                        <span className={styles.weatherLabel}>Feels like</span>
+                        <span className={styles.weatherValue}>
+                          {weather.feelsLike}°C
+                        </span>
+                      </div>
+                      <div className={styles.weatherItem}>
+                        <span className={styles.weatherLabel}>Humidity</span>
+                        <span className={styles.weatherValue}>
+                          {weather.humidity}%
+                        </span>
+                      </div>
+                      <div className={styles.weatherItem}>
+                        <span className={styles.weatherLabel}>Wind</span>
+                        <span className={styles.weatherValue}>
+                          {weather.windSpeed} m/s
+                        </span>
+                      </div>
+                      <div className={styles.weatherItem}>
+                        <span className={styles.weatherLabel}>Country</span>
+                        <span className={styles.weatherValue}>
+                          {weather.country}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {!weatherLoading && !weather && (
+                  <p className={styles.smallMuted}>Weather unavailable</p>
+                )}
+              </div>
+
+              {/* Emergency contacts for this country */}
+              {emergency && (
+                <div className={styles.card}>
+                  <h2 className={styles.cardTitle}>
+                    🚨 Emergency — {emergency.country}
+                  </h2>
+                  <div className={styles.emergencyGrid}>
+                    <a
+                      href={`tel:${String(emergency.policeNo).replace(/[^\d+]/g, "")}`}
+                      className={styles.emergencyItem}
+                    >
+                      <span className={styles.emergencyIcon}>🚔</span>
+                      <div>
+                        <p className={styles.emergencyLabel}>Police</p>
+                        <p className={styles.emergencyValue}>
+                          {emergency.policeNo}
+                        </p>
+                      </div>
+                    </a>
+                    <a
+                      href={`tel:${String(emergency.ambulanceNo).replace(/[^\d+]/g, "")}`}
+                      className={styles.emergencyItem}
+                    >
+                      <span className={styles.emergencyIcon}>🚑</span>
+                      <div>
+                        <p className={styles.emergencyLabel}>Ambulance</p>
+                        <p className={styles.emergencyValue}>
+                          {emergency.ambulanceNo}
+                        </p>
+                      </div>
+                    </a>
+                    <a
+                      href={`tel:${String(emergency.fireNo).replace(/[^\d+]/g, "")}`}
+                      className={styles.emergencyItem}
+                    >
+                      <span className={styles.emergencyIcon}>🔥</span>
+                      <div>
+                        <p className={styles.emergencyLabel}>Fire</p>
+                        <p className={styles.emergencyValue}>
+                          {emergency.fireNo}
+                        </p>
+                      </div>
+                    </a>
+                    <a
+                      href={`tel:${String(emergency.touristHelpline).replace(/[^\d+]/g, "")}`}
+                      className={styles.emergencyItem}
+                    >
+                      <span className={styles.emergencyIcon}>✈️</span>
+                      <div>
+                        <p className={styles.emergencyLabel}>
+                          Tourist Helpline
+                        </p>
+                        <p className={styles.emergencyValue}>
+                          {emergency.touristHelpline}
+                        </p>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Right — sidebar */}
@@ -289,121 +409,6 @@ function DestinationDetail() {
                 <li className={styles.tip}>🚨 Save local emergency numbers</li>
               </ul>
             </div>
-
-            {/* Weather Card */}
-            <div className={styles.card}>
-              <h2 className={styles.cardTitle}>Current Weather</h2>
-              {weatherLoading && (
-                <p className={styles.smallMuted}>Loading weather...</p>
-              )}
-              {weather && (
-                <div className={styles.weatherBox}>
-                  <div className={styles.weatherTop}>
-                    <img
-                      src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
-                      alt={weather.description}
-                      className={styles.weatherIcon}
-                    />
-                    <div>
-                      <p className={styles.weatherTemp}>
-                        {weather.temperature}°C
-                      </p>
-                      <p className={styles.weatherDesc}>
-                        {weather.description}
-                      </p>
-                    </div>
-                  </div>
-                  <div className={styles.weatherDetails}>
-                    <div className={styles.weatherItem}>
-                      <span className={styles.weatherLabel}>Feels like</span>
-                      <span className={styles.weatherValue}>
-                        {weather.feelsLike}°C
-                      </span>
-                    </div>
-                    <div className={styles.weatherItem}>
-                      <span className={styles.weatherLabel}>Humidity</span>
-                      <span className={styles.weatherValue}>
-                        {weather.humidity}%
-                      </span>
-                    </div>
-                    <div className={styles.weatherItem}>
-                      <span className={styles.weatherLabel}>Wind</span>
-                      <span className={styles.weatherValue}>
-                        {weather.windSpeed} m/s
-                      </span>
-                    </div>
-                    <div className={styles.weatherItem}>
-                      <span className={styles.weatherLabel}>Country</span>
-                      <span className={styles.weatherValue}>
-                        {weather.country}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              )}
-              {!weatherLoading && !weather && (
-                <p className={styles.smallMuted}>Weather unavailable</p>
-              )}
-            </div>
-
-            {/* Emergency contacts for this country */}
-            {emergency && (
-              <div className={styles.card}>
-                <h2 className={styles.cardTitle}>
-                  🚨 Emergency — {emergency.country}
-                </h2>
-                <div className={styles.emergencyGrid}>
-                  <a
-                    href={`tel:${String(emergency.policeNo).replace(/[^\d+]/g, "")}`}
-                    className={styles.emergencyItem}
-                  >
-                    <span className={styles.emergencyIcon}>🚔</span>
-                    <div>
-                      <p className={styles.emergencyLabel}>Police</p>
-                      <p className={styles.emergencyValue}>
-                        {emergency.policeNo}
-                      </p>
-                    </div>
-                  </a>
-                  <a
-                    href={`tel:${String(emergency.ambulanceNo).replace(/[^\d+]/g, "")}`}
-                    className={styles.emergencyItem}
-                  >
-                    <span className={styles.emergencyIcon}>🚑</span>
-                    <div>
-                      <p className={styles.emergencyLabel}>Ambulance</p>
-                      <p className={styles.emergencyValue}>
-                        {emergency.ambulanceNo}
-                      </p>
-                    </div>
-                  </a>
-                  <a
-                    href={`tel:${String(emergency.fireNo).replace(/[^\d+]/g, "")}`}
-                    className={styles.emergencyItem}
-                  >
-                    <span className={styles.emergencyIcon}>🔥</span>
-                    <div>
-                      <p className={styles.emergencyLabel}>Fire</p>
-                      <p className={styles.emergencyValue}>
-                        {emergency.fireNo}
-                      </p>
-                    </div>
-                  </a>
-                  <a
-                    href={`tel:${String(emergency.touristHelpline).replace(/[^\d+]/g, "")}`}
-                    className={styles.emergencyItem}
-                  >
-                    <span className={styles.emergencyIcon}>✈️</span>
-                    <div>
-                      <p className={styles.emergencyLabel}>Tourist Helpline</p>
-                      <p className={styles.emergencyValue}>
-                        {emergency.touristHelpline}
-                      </p>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            )}
 
             {/* Map Card */}
             {destination.coordinates?.lat && (

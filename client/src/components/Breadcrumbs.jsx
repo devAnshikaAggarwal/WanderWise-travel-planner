@@ -17,6 +17,17 @@ const LABELS = {
   register: "Register",
 };
 
+// Pages that logically live UNDER another page — parents are injected
+// so the trail shows the real navigation path, not just the URL.
+const PARENTS = {
+  itinerary: [{ label: "My Trips", path: "/dashboard" }],
+  budget: [{ label: "My Trips", path: "/dashboard" }],
+  checklist: [{ label: "My Trips", path: "/dashboard" }],
+  "trip-planner": [{ label: "My Trips", path: "/dashboard" }],
+  wishlist: [{ label: "My Trips", path: "/dashboard" }],
+  profile: [{ label: "My Trips", path: "/dashboard" }],
+};
+
 // Detect MongoDB ObjectIds (24 hex chars) so we don't show raw IDs
 const isMongoId = (segment) => /^[a-f0-9]{24}$/i.test(segment);
 
@@ -31,9 +42,15 @@ export default function Breadcrumbs() {
   // Build crumb list, skipping raw IDs
   const crumbs = [];
   let pathSoFar = "";
-  segments.forEach((seg) => {
+  segments.forEach((seg, idx) => {
     pathSoFar += `/${seg}`;
     if (isMongoId(seg)) return; // skip IDs like /budget/64f1a2...
+
+    // Inject logical parents for the first segment
+    if (idx === 0 && PARENTS[seg]) {
+      crumbs.push(...PARENTS[seg]);
+    }
+
     crumbs.push({
       label: LABELS[seg] || seg.charAt(0).toUpperCase() + seg.slice(1),
       path: pathSoFar,
@@ -48,7 +65,7 @@ export default function Breadcrumbs() {
         Home
       </Link>
       {crumbs.map((crumb, i) => (
-        <span key={crumb.path} className={styles.crumbGroup}>
+        <span key={`${crumb.path}-${i}`} className={styles.crumbGroup}>
           <span className={styles.separator}>›</span>
           {i === crumbs.length - 1 ? (
             <span className={styles.current}>{crumb.label}</span>

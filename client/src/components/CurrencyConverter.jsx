@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { convertCurrency } from "../services/currencyService";
+import styles from "../styles/CurrencyConverter.module.css";
 
 const CURRENCIES = [
   "USD",
@@ -11,6 +12,10 @@ const CURRENCIES = [
   "CAD",
   "AED",
   "SGD",
+  "CHF",
+  "THB",
+  "TRY",
+  "BRL",
 ];
 
 export default function CurrencyConverter() {
@@ -34,46 +39,58 @@ export default function CurrencyConverter() {
     }
   };
 
-  return (
-    <div
-      style={{
-        background: "#FFF8F5",
-        border: "1px solid #F0997B",
-        borderRadius: "12px",
-        padding: "24px",
-        maxWidth: "420px",
-      }}
-    >
-      <h3
-        style={{
-          color: "#3D1A0E",
-          fontFamily: "Georgia, serif",
-          marginBottom: "16px",
-        }}
-      >
-        Currency Converter
-      </h3>
+  const handleSwap = () => {
+    setFrom(to);
+    setTo(from);
+    setResult(null);
+  };
 
-      <div style={{ display: "flex", gap: "10px", marginBottom: "12px" }}>
-        <input
-          type="number"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-          style={{
-            flex: 1,
-            padding: "10px",
-            borderRadius: "8px",
-            border: "1px solid #F0997B",
-          }}
-        />
+  return (
+    <div className={styles.card}>
+      <h3 className={styles.title}>💱 Currency Converter</h3>
+      <p className={styles.subtitle}>Live exchange rates for your travels</p>
+
+      <div className={styles.row}>
+        <div className={styles.field}>
+          <label className={styles.label}>Amount</label>
+          <input
+            type="number"
+            min="0"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+            className={styles.input}
+          />
+        </div>
+        <div className={styles.field}>
+          <label className={styles.label}>From</label>
+          <select
+            value={from}
+            onChange={(e) => setFrom(e.target.value)}
+            className={styles.input}
+          >
+            {CURRENCIES.map((c) => (
+              <option key={c} value={c}>
+                {c}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      <button
+        className={styles.swapBtn}
+        onClick={handleSwap}
+        title="Swap currencies"
+      >
+        ⇅ Swap
+      </button>
+
+      <div className={styles.field}>
+        <label className={styles.label}>To</label>
         <select
-          value={from}
-          onChange={(e) => setFrom(e.target.value)}
-          style={{
-            padding: "10px",
-            borderRadius: "8px",
-            border: "1px solid #F0997B",
-          }}
+          value={to}
+          onChange={(e) => setTo(e.target.value)}
+          className={styles.input}
         >
           {CURRENCIES.map((c) => (
             <option key={c} value={c}>
@@ -83,69 +100,26 @@ export default function CurrencyConverter() {
         </select>
       </div>
 
-      <div
-        style={{
-          textAlign: "center",
-          color: "#D85A30",
-          margin: "8px 0",
-          fontWeight: "bold",
-        }}
-      >
-        ↓
-      </div>
-
-      <select
-        value={to}
-        onChange={(e) => setTo(e.target.value)}
-        style={{
-          width: "100%",
-          padding: "10px",
-          borderRadius: "8px",
-          border: "1px solid #F0997B",
-          marginBottom: "16px",
-        }}
-      >
-        {CURRENCIES.map((c) => (
-          <option key={c} value={c}>
-            {c}
-          </option>
-        ))}
-      </select>
-
       <button
+        className={styles.convertBtn}
         onClick={handleConvert}
         disabled={loading}
-        style={{
-          width: "100%",
-          padding: "12px",
-          background: "#D85A30",
-          color: "#FFF8F5",
-          border: "none",
-          borderRadius: "8px",
-          fontWeight: "bold",
-          cursor: "pointer",
-        }}
       >
         {loading ? "Converting..." : "Convert"}
       </button>
 
-      {error && <p style={{ color: "#D85A30", marginTop: "10px" }}>{error}</p>}
+      {error && <p className={styles.error}>{error}</p>}
 
       {result && (
-        <div
-          style={{
-            marginTop: "16px",
-            padding: "14px",
-            background: "#F0997B22",
-            borderRadius: "8px",
-            textAlign: "center",
-          }}
-        >
-          <p style={{ fontSize: "20px", fontWeight: "bold", color: "#3D1A0E" }}>
-            {amount} {from} = {result.converted} {to}
+        <div className={styles.result}>
+          <p className={styles.resultMain}>
+            {amount} {from} ={" "}
+            <strong>
+              {result.converted} {to}
+            </strong>
           </p>
-          <p style={{ fontSize: "12px", color: "#993C1D" }}>
-            Rate: 1 {from} = {result.rate} {to}
+          <p className={styles.resultRate}>
+            1 {from} = {result.rate} {to}
           </p>
         </div>
       )}

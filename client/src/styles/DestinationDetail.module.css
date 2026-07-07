@@ -473,3 +473,18 @@
   color: var(--dark);
   margin: 0;
 }
+
+/* ---- Weather + Emergency duo (main column) ---- */
+
+.duoGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  align-items: start;
+}
+
+@media (max-width: 880px) {
+  .duoGrid {
+    grid-template-columns: 1fr;
+  }
+}
