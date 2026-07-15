@@ -1,3 +1,4 @@
+const path = require("path");
 const dotenv = require("dotenv");
 dotenv.config(); // MUST be first — before anything that reads process.env
 
@@ -37,6 +38,10 @@ app.use("/api/currency", currencyRoutes);
 
 app.get("/", (req, res) => {
   res.send("WanderWise API is running 🏔️");
+});
+
+app.get("/favicon.ico", (req, res) => {
+  res.sendFile(path.join(__dirname, "favicon.png"));
 });
 
 // Start scheduled jobs
