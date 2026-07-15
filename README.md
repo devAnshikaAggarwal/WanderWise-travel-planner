@@ -1,84 +1,157 @@
-# WanderWise 🏔️
+<div align="center">
 
-Full stack travel planning website — search destinations, plan itineraries, track budgets, and get email reminders before your trip.
+# 🏔️ WanderWise
 
-**Tagline:** roam smart. go far.
+### roam smart. go far.
 
-## Tech Stack
-- MongoDB — database
-- Express.js — backend REST API
-- React — frontend
-- Node.js — server
-- JWT — authentication
-- Nodemailer — email reminders
-- Leaflet.js — interactive maps
-- OpenWeatherMap API — weather data
+**A full-stack travel planning platform — search destinations, build itineraries, track budgets, and travel confidently, all in one place.**
 
-## Project Structure
+[**🌐 Live Demo**](https://wanderwise-roam-smart-go-far.vercel.app) · [**API**](https://wanderwise-roam-smart-go-far.onrender.com)
+
+![MERN](https://img.shields.io/badge/stack-MERN-D85A30)
+![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)
+![Node](https://img.shields.io/badge/Node.js-Express-339933?logo=node.js&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?logo=mongodb&logoColor=white)
+![Deployed](https://img.shields.io/badge/deployed-Vercel%20%2B%20Render-black)
+
+</div>
+
+---
+
+## ✨ Preview
+
+| Home | Explore Destinations |
+|---|---|
+| ![Home](screenshots/home.png) | ![Destinations](screenshots/destinations.png) |
+
+| Destination Detail | Dashboard |
+|---|---|
+| ![Detail](screenshots/detail.png) | ![Dashboard](screenshots/dashboard.png) |
+
+---
+
+## 🚀 Features
+
+- **🔐 Authentication** — JWT-based register/login with bcrypt password hashing
+- **🌍 24+ Destinations** — searchable, filterable by climate, with real photography and live data
+- **🌤️ Live Weather** — current conditions for every destination via OpenWeatherMap
+- **🗺️ Interactive Maps** — Leaflet.js maps pinned to each destination
+- **🧳 Trip Planning** — create trips linked to destinations with dates and status tracking
+- **📋 Day-by-Day Itineraries** — plan activities with times and notes, grouped by day
+- **💰 Budget Tracking** — set trip budgets, log categorized expenses, visual progress bar
+- **✅ Smart Checklists** — categorized packing lists with progress tracking and quick-add suggestions
+- **❤️ Wishlist** — save dream destinations for later
+- **🚨 Emergency Contacts** — police/ambulance/fire/tourist-helpline numbers for 19 countries, tap-to-call, auto-matched to your trip's destination
+- **💱 Currency Converter** — live exchange rates for 13 currencies
+- **📧 Email Reminders** — automated Nodemailer + cron job emails 3 days before each trip starts
+- **📱 Fully Responsive** — designed for desktop and mobile with a custom Sunset Coral theme
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|---|---|
+| **Frontend** | React 18 (Vite), React Router, CSS Modules, react-icons, Axios |
+| **Backend** | Node.js, Express.js |
+| **Database** | MongoDB Atlas + Mongoose |
+| **Auth** | JSON Web Tokens, bcrypt |
+| **APIs & Libraries** | OpenWeatherMap, open.er-api (currency), Leaflet.js, Nodemailer, node-cron |
+| **Deployment** | Vercel (frontend) · Render (backend) · MongoDB Atlas (database) |
+
+## 🏗️ Architecture
 
 ```
-wanderwise/
-├── client/                # React frontend
-│   └── src/
-│       ├── pages/         # Page-level components (Home, Login, TripPlanner...)
-│       ├── components/    # Reusable components (SearchBar, TripCard...)
-│       ├── context/       # Global state (AuthContext, TripContext...)
-│       ├── services/      # API call functions
-│       ├── assets/logo/   # Logo files
-│       └── styles/        # CSS/theme files
-│
-└── server/                # Node + Express backend
-    ├── models/            # Mongoose schemas (User, Trip, Destination...)
-    ├── routes/            # Express routes (authRoutes, tripRoutes...)
-    ├── controllers/        # Route logic
-    ├── middleware/         # Auth middleware, error handlers
-    └── config/             # Database connection, env config
+WanderWise/
+├── client/                  # React frontend (Vite)
+│   ├── src/
+│   │   ├── components/      # Navbar, Footer, Breadcrumbs, CurrencyConverter...
+│   │   ├── pages/           # Home, Destinations, Dashboard, Budget, Itinerary...
+│   │   ├── styles/          # theme.css (design tokens) + CSS Modules per page
+│   │   └── services/        # Axios instance with JWT interceptor
+│   └── vercel.json          # SPA route rewrites
+└── server/                  # Express backend
+    ├── config/              # MongoDB connection
+    ├── controllers/         # Route handlers
+    ├── middleware/          # JWT auth guard
+    ├── models/              # Mongoose schemas
+    ├── routes/              # API route definitions
+    ├── utils/               # Nodemailer + trip reminder cron job
+    └── seed.js              # 24 destinations + 19 countries of emergency data
 ```
 
-## Team Roles
+## ⚡ Getting Started
 
-| Member | Role |
-|---|---|
-| Anshika Aggarwal | Team Lead + Backend (API, DB, Auth, Deployment) |
-| Sneha Sharma | Frontend — Auth pages (Login, Register) |
-| Yuvanshi Thakur | Frontend — Home & Search |
-| Arashdeep Kaur | Frontend — Trip Planner & Itinerary |
-| Gayatri Sharma | Frontend — Budget & Wishlist |
-| Aditya Bishnoi | Frontend — Extras (Emergency, Dashboard) & Testing |
+### Prerequisites
+- Node.js 18+
+- A MongoDB Atlas cluster (free tier works)
+- Gmail account with an [App Password](https://support.google.com/accounts/answer/185833) (for email reminders)
+- [OpenWeatherMap](https://openweathermap.org/api) API key (free)
 
-## Color Theme — Sunset Coral
+### 1. Clone & install
 
-| Name | Hex |
-|---|---|
-| Darkest | `#1A0A05` |
-| Dark/Navbar | `#3D1A0E` |
-| Primary | `#993C1D` |
-| Brand | `#D85A30` |
-| Accent | `#F0997B` |
-| Surface/BG | `#FAECE7` / `#FFF8F5` |
+```bash
+git clone https://github.com/devAnshikaAggarwal/WanderWise-travel-planner.git
+cd WanderWise-travel-planner
 
-Heading font: Georgia serif, bold. Body font: Arial / system-ui.
+# backend
+cd server && npm install
 
-## Getting Started
+# frontend
+cd ../client && npm install
+```
 
-### Backend
+### 2. Configure environment
+
+Create `server/.env` (see `server/.env.example`):
+
+```env
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=any_long_random_string
+OPENWEATHER_API_KEY=your_openweathermap_key
+EMAIL_USER=your@gmail.com
+EMAIL_PASS=your_16_char_gmail_app_password
+```
+
+### 3. Seed the database
+
 ```bash
 cd server
-npm install
-npm run dev
+node seed.js
 ```
 
-### Frontend
+### 4. Run
+
 ```bash
-cd client
-npm install
-npm run dev
+# terminal 1 — backend (http://localhost:5000)
+cd server && node server.js
+
+# terminal 2 — frontend (http://localhost:3000)
+cd client && npm run dev
 ```
 
-## Features
+## 📡 API Overview
 
-**Phase 1 (Core)** — Auth, Search, Destination Details, Trip Planner, Daily Itinerary, Budget Calculator, Wishlist, Travel Checklist
+| Endpoint | Description |
+|---|---|
+| `POST /api/auth/register` · `POST /api/auth/login` | Authentication |
+| `GET /api/destinations` | Destinations (supports `?search=`) |
+| `GET/POST/PUT/DELETE /api/trips` | Trip CRUD (protected) |
+| `GET/POST /api/itinerary/:tripId` | Day-by-day activities |
+| `GET/POST /api/budget/:tripId` | Budgets and expenses |
+| `GET/POST/PUT /api/checklist/:tripId` | Packing checklist |
+| `GET/POST/DELETE /api/wishlist` | Wishlist |
+| `GET /api/emergency?country=` | Emergency numbers by country |
+| `GET /api/weather?city=` | Live weather |
+| `GET /api/currency/convert?from=&to=&amount=` | Currency conversion |
 
-**Phase 2** — Interactive Map, Weather Forecast, Currency Converter, Emergency Contacts, Expense Tracker, My Trips Dashboard, Email Reminders
+## 👩‍💻 Author
 
-**Phase 3** — Photo Gallery, Analytics, Travel Journal, Profile & Settings
+**Anshika Aggarwal**
+GitHub: [@devAnshikaAggarwal](https://github.com/devAnshikaAggarwal)
+
+---
+
+<div align="center">
+
+*WanderWise — roam smart. go far.* 🏔️
+
+</div>
