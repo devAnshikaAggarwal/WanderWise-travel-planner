@@ -1,8 +1,6 @@
 <div align="center">
 
-# 🏔️ WanderWise
-
-### roam smart. go far.
+<img src="client/src/assets/logo/logo.png" alt="WanderWise logo" width="280"  />
 
 **A full-stack travel planning platform — search destinations, build itineraries, track budgets, and travel confidently, all in one place.**
 
@@ -153,6 +151,8 @@ GitHub: [@devAnshikaAggarwal](https://github.com/devAnshikaAggarwal)
 
 <div align="center">
 
-_WanderWise — roam smart. go far._ 🏔️
+<img src="screenshots/logo.png" alt="WanderWise logo" width="50"/>
+ 
+ _WanderWise — roam smart. go far._
 
 </div>
