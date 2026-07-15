@@ -20,12 +20,12 @@
 
 ## ✨ Preview
 
-| Home | Explore Destinations |
-|---|---|
+| Home                          | Explore Destinations                          |
+| ----------------------------- | --------------------------------------------- |
 | ![Home](screenshots/home.png) | ![Destinations](screenshots/destinations.png) |
 
-| Destination Detail | Dashboard |
-|---|---|
+| Destination Detail                | Dashboard                               |
+| --------------------------------- | --------------------------------------- |
 | ![Detail](screenshots/detail.png) | ![Dashboard](screenshots/dashboard.png) |
 
 ---
@@ -48,14 +48,14 @@
 
 ## 🛠️ Tech Stack
 
-| Layer | Technology |
-|---|---|
-| **Frontend** | React 18 (Vite), React Router, CSS Modules, react-icons, Axios |
-| **Backend** | Node.js, Express.js |
-| **Database** | MongoDB Atlas + Mongoose |
-| **Auth** | JSON Web Tokens, bcrypt |
+| Layer                | Technology                                                                |
+| -------------------- | ------------------------------------------------------------------------- |
+| **Frontend**         | React 18 (Vite), React Router, CSS Modules, react-icons, Axios            |
+| **Backend**          | Node.js, Express.js                                                       |
+| **Database**         | MongoDB Atlas + Mongoose                                                  |
+| **Auth**             | JSON Web Tokens, bcrypt                                                   |
 | **APIs & Libraries** | OpenWeatherMap, open.er-api (currency), Leaflet.js, Nodemailer, node-cron |
-| **Deployment** | Vercel (frontend) · Render (backend) · MongoDB Atlas (database) |
+| **Deployment**       | Vercel (frontend) · Render (backend) · MongoDB Atlas (database)           |
 
 ## 🏗️ Architecture
 
@@ -81,6 +81,7 @@ WanderWise/
 ## ⚡ Getting Started
 
 ### Prerequisites
+
 - Node.js 18+
 - A MongoDB Atlas cluster (free tier works)
 - Gmail account with an [App Password](https://support.google.com/accounts/answer/185833) (for email reminders)
@@ -130,18 +131,18 @@ cd client && npm run dev
 
 ## 📡 API Overview
 
-| Endpoint | Description |
-|---|---|
-| `POST /api/auth/register` · `POST /api/auth/login` | Authentication |
-| `GET /api/destinations` | Destinations (supports `?search=`) |
-| `GET/POST/PUT/DELETE /api/trips` | Trip CRUD (protected) |
-| `GET/POST /api/itinerary/:tripId` | Day-by-day activities |
-| `GET/POST /api/budget/:tripId` | Budgets and expenses |
-| `GET/POST/PUT /api/checklist/:tripId` | Packing checklist |
-| `GET/POST/DELETE /api/wishlist` | Wishlist |
-| `GET /api/emergency?country=` | Emergency numbers by country |
-| `GET /api/weather?city=` | Live weather |
-| `GET /api/currency/convert?from=&to=&amount=` | Currency conversion |
+| Endpoint                                           | Description                        |
+| -------------------------------------------------- | ---------------------------------- |
+| `POST /api/auth/register` · `POST /api/auth/login` | Authentication                     |
+| `GET /api/destinations`                            | Destinations (supports `?search=`) |
+| `GET/POST/PUT/DELETE /api/trips`                   | Trip CRUD (protected)              |
+| `GET/POST /api/itinerary/:tripId`                  | Day-by-day activities              |
+| `GET/POST /api/budget/:tripId`                     | Budgets and expenses               |
+| `GET/POST/PUT /api/checklist/:tripId`              | Packing checklist                  |
+| `GET/POST/DELETE /api/wishlist`                    | Wishlist                           |
+| `GET /api/emergency?country=`                      | Emergency numbers by country       |
+| `GET /api/weather?city=`                           | Live weather                       |
+| `GET /api/currency/convert?from=&to=&amount=`      | Currency conversion                |
 
 ## 👩‍💻 Author
 
@@ -152,6 +153,6 @@ GitHub: [@devAnshikaAggarwal](https://github.com/devAnshikaAggarwal)
 
 <div align="center">
 
-*WanderWise — roam smart. go far.* 🏔️
+_WanderWise — roam smart. go far._ 🏔️
 
 </div>
