@@ -1,5 +1,19 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import {
+  FaSearch,
+  FaMapMarkedAlt,
+  FaHeart,
+  FaExclamationTriangle,
+  FaMapMarkerAlt,
+  FaCalendarAlt,
+  FaPlane,
+  FaClipboardList,
+  FaWallet,
+  FaCheckSquare,
+  FaTrash,
+  FaGlobe,
+} from "react-icons/fa";
 import api from "../services/api";
 import styles from "../styles/Dashboard.module.css";
 
@@ -78,10 +92,10 @@ function Dashboard() {
   };
 
   const quickLinks = [
-    { icon: "🔍", label: "Explore", path: "/destinations" },
-    { icon: "🗺️", label: "Plan Trip", path: "/trip-planner" },
-    { icon: "❤️", label: "Wishlist", path: "/wishlist" },
-    { icon: "🚨", label: "Emergency", path: "/emergency" },
+    { icon: <FaSearch />, label: "Explore", path: "/destinations" },
+    { icon: <FaMapMarkedAlt />, label: "Plan Trip", path: "/trip-planner" },
+    { icon: <FaHeart />, label: "Wishlist", path: "/wishlist" },
+    { icon: <FaExclamationTriangle />, label: "Emergency", path: "/emergency" },
   ];
 
   const stats = [
@@ -107,7 +121,7 @@ function Dashboard() {
         <div className={styles.headerContent}>
           <div>
             <h1 className={styles.greeting}>
-              Welcome back, {user.name?.split(" ")[0] || "Traveler"} 👋
+              Welcome back, {user.name?.split(" ")[0] || "Traveler"}
             </h1>
             <p className={styles.subGreeting}>Ready for your next adventure?</p>
           </div>
@@ -163,7 +177,9 @@ function Dashboard() {
 
           {!loading && trips.length === 0 && (
             <div className={styles.emptyState}>
-              <span className={styles.emptyIcon}>🗺️</span>
+              <span className={styles.emptyIcon}>
+                <FaMapMarkedAlt />
+              </span>
               <h3 className={styles.emptyTitle}>No trips yet</h3>
               <p className={styles.emptyText}>
                 Start planning your first adventure!
@@ -197,7 +213,8 @@ function Dashboard() {
                         />
                         {countdown && (
                           <span className={styles.countdownBadge}>
-                            ✈️ in {countdown} day{countdown !== 1 ? "s" : ""}
+                            <FaPlane className={styles.badgeIcon} /> in{" "}
+                            {countdown} day{countdown !== 1 ? "s" : ""}
                           </span>
                         )}
                         {weather && (
@@ -219,7 +236,8 @@ function Dashboard() {
                           <h3 className={styles.tripName}>{trip.title}</h3>
                           {dest && (
                             <p className={styles.tripDest}>
-                              📍 {dest.name}, {dest.country}
+                              <FaMapMarkerAlt className={styles.inlineIcon} />{" "}
+                              {dest.name}, {dest.country}
                             </p>
                           )}
                         </div>
@@ -232,7 +250,8 @@ function Dashboard() {
 
                       {trip.startDate && (
                         <p className={styles.tripDates}>
-                          🗓️ {new Date(trip.startDate).toLocaleDateString()} →{" "}
+                          <FaCalendarAlt className={styles.inlineIcon} />{" "}
+                          {new Date(trip.startDate).toLocaleDateString()} →{" "}
                           {new Date(trip.endDate).toLocaleDateString()}
                         </p>
                       )}
@@ -242,25 +261,28 @@ function Dashboard() {
                           className={styles.actionBtn}
                           onClick={() => navigate(`/itinerary/${trip._id}`)}
                         >
-                          📋 Itinerary
+                          <FaClipboardList className={styles.inlineIcon} />{" "}
+                          Itinerary
                         </button>
                         <button
                           className={styles.actionBtn}
                           onClick={() => navigate(`/budget/${trip._id}`)}
                         >
-                          💰 Budget
+                          <FaWallet className={styles.inlineIcon} /> Budget
                         </button>
                         <button
                           className={styles.actionBtn}
                           onClick={() => navigate(`/checklist/${trip._id}`)}
                         >
-                          ✅ Checklist
+                          <FaCheckSquare className={styles.inlineIcon} />{" "}
+                          Checklist
                         </button>
                         <button
                           className={styles.deleteBtn}
                           onClick={() => handleDeleteTrip(trip._id)}
+                          title="Delete trip"
                         >
-                          🗑️
+                          <FaTrash />
                         </button>
                       </div>
 
@@ -273,7 +295,8 @@ function Dashboard() {
                               navigate(`/destinations/${dest._id}`)
                             }
                           >
-                            🌍 View destination
+                            <FaGlobe className={styles.inlineIcon} /> View
+                            destination
                           </button>
                           <button
                             className={styles.tripLink}
@@ -283,7 +306,10 @@ function Dashboard() {
                               )
                             }
                           >
-                            🚨 Emergency info
+                            <FaExclamationTriangle
+                              className={styles.inlineIcon}
+                            />{" "}
+                            Emergency info
                           </button>
                         </div>
                       )}

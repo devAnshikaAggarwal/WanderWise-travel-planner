@@ -1,5 +1,12 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import {
+  FaExclamationTriangle,
+  FaShieldAlt,
+  FaAmbulance,
+  FaFire,
+  FaPlane,
+} from "react-icons/fa";
 import api from "../services/api";
 import styles from "../styles/Emergency.module.css";
 
@@ -77,16 +84,19 @@ function Emergency() {
   const telHref = (num) => `tel:${String(num).replace(/[^\d+]/g, "")}`;
 
   const NUMBER_ROWS = [
-    { key: "policeNo", label: "Police", icon: "🚔" },
-    { key: "ambulanceNo", label: "Ambulance", icon: "🚑" },
-    { key: "fireNo", label: "Fire", icon: "🔥" },
-    { key: "touristHelpline", label: "Tourist Helpline", icon: "✈️" },
+    { key: "policeNo", label: "Police", icon: <FaShieldAlt /> },
+    { key: "ambulanceNo", label: "Ambulance", icon: <FaAmbulance /> },
+    { key: "fireNo", label: "Fire", icon: <FaFire /> },
+    { key: "touristHelpline", label: "Tourist Helpline", icon: <FaPlane /> },
   ];
 
   return (
     <div className={styles.page}>
       <div className={styles.header}>
-        <h1 className={styles.title}>🚨 Emergency Contacts</h1>
+        <h1 className={styles.title}>
+          <FaExclamationTriangle className={styles.titleIcon} /> Emergency
+          Contacts
+        </h1>
         <p className={styles.subtitle}>
           Local emergency numbers for your destination
         </p>
@@ -99,7 +109,7 @@ function Emergency() {
               onChange={handleCountrySelect}
               value={allCountries.includes(search) ? search : "all"}
             >
-              <option value="all">🌍 All countries</option>
+              <option value="all">All countries</option>
               {allCountries.map((c) => (
                 <option key={c} value={c}>
                   {FLAGS[c] || "🌍"} {c}
@@ -138,8 +148,9 @@ function Emergency() {
 
       <div className={styles.content}>
         <div className={styles.warningBox}>
-          ⚠️ Always save local emergency numbers before traveling to a new
-          country. Numbers below are tap-to-call on mobile.
+          <FaExclamationTriangle className={styles.inlineIcon} /> Always save
+          local emergency numbers before traveling to a new country. Numbers
+          below are tap-to-call on mobile.
         </div>
 
         {loading && (

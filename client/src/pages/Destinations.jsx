@@ -1,5 +1,18 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import {
+  FaSearch,
+  FaMapMarkerAlt,
+  FaCalendarAlt,
+  FaPlane,
+  FaUmbrellaBeach,
+  FaLandmark,
+  FaLeaf,
+  FaMonument,
+  FaMosque,
+  FaMountain,
+  FaCity,
+} from "react-icons/fa";
 import api from "../services/api";
 import styles from "../styles/Destinations.module.css";
 
@@ -14,14 +27,14 @@ const CLIMATES = [
   "Desert",
 ];
 
-const CLIMATE_EMOJI = {
-  Tropical: "🌴",
-  Mediterranean: "🏛️",
-  Temperate: "⛩️",
-  Arid: "🏰",
-  "Semi-arid": "🕌",
-  Alpine: "🏔️",
-  Desert: "🌆",
+const CLIMATE_ICON = {
+  Tropical: <FaUmbrellaBeach />,
+  Mediterranean: <FaLandmark />,
+  Temperate: <FaLeaf />,
+  Arid: <FaMonument />,
+  "Semi-arid": <FaMosque />,
+  Alpine: <FaMountain />,
+  Desert: <FaCity />,
 };
 
 function Destinations() {
@@ -82,7 +95,7 @@ function Destinations() {
             className={styles.searchInput}
           />
           <button type="submit" className={styles.searchButton}>
-            Search 🔍
+            Search <FaSearch className={styles.inlineIcon} />
           </button>
           {search && (
             <button
@@ -110,7 +123,10 @@ function Destinations() {
                 className={`${styles.chip} ${climateFilter === c ? styles.chipActive : ""}`}
                 onClick={() => setClimateFilter(c)}
               >
-                {c !== "All" && CLIMATE_EMOJI[c]} {c}
+                {c !== "All" && (
+                  <span className={styles.chipIcon}>{CLIMATE_ICON[c]}</span>
+                )}
+                {c}
               </button>
             ))}
           </div>
@@ -173,7 +189,7 @@ function Destinations() {
                       />
                     ) : (
                       <span className={styles.cardEmoji}>
-                        {CLIMATE_EMOJI[dest.climate] || "✈️"}
+                        {CLIMATE_ICON[dest.climate] || <FaPlane />}
                       </span>
                     )}
                     <span className={styles.climateBadge}>{dest.climate}</span>
@@ -183,14 +199,18 @@ function Destinations() {
                   <div className={styles.cardBody}>
                     <div className={styles.cardTop}>
                       <h3 className={styles.cardName}>{dest.name}</h3>
-                      <p className={styles.cardCountry}>📍 {dest.country}</p>
+                      <p className={styles.cardCountry}>
+                        <FaMapMarkerAlt className={styles.inlineIcon} />{" "}
+                        {dest.country}
+                      </p>
                     </div>
 
                     <p className={styles.cardDesc}>{dest.description}</p>
 
                     <div className={styles.cardFooter}>
                       <span className={styles.bestTime}>
-                        🗓️ {dest.bestTime}
+                        <FaCalendarAlt className={styles.inlineIcon} />{" "}
+                        {dest.bestTime}
                       </span>
                       <button
                         className={styles.viewButton}

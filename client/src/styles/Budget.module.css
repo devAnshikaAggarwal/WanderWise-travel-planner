@@ -327,3 +327,23 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ---- react-icons ---- */
+
+.inlineIcon {
+  vertical-align: -2px;
+  margin-right: 6px;
+}
+
+.emptyIcon {
+  font-size: 48px;
+  color: var(--accent);
+  display: flex;
+  justify-content: center;
+}
+
+.deleteBtn {
+  color: #791f1f;
+  display: inline-flex;
+  align-items: center;
+}

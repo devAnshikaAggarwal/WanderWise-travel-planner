@@ -1,3 +1,4 @@
+import { FaLightbulb } from "react-icons/fa";
 import CurrencyConverter from "../components/CurrencyConverter";
 import styles from "../styles/Converter.module.css";
 
@@ -15,7 +16,9 @@ export default function Converter() {
         <CurrencyConverter />
 
         <div className={styles.tips}>
-          <h3 className={styles.tipsTitle}>💡 Travel money tips</h3>
+          <h3 className={styles.tipsTitle}>
+            <FaLightbulb className={styles.inlineIcon} /> Travel money tips
+          </h3>
           <ul className={styles.tipsList}>
             <li className={styles.tip}>
               Card payments usually get better rates than airport exchange

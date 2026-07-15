@@ -385,7 +385,7 @@
 /* ---- Map ---- */
 
 .map {
-  height: 220px;
+  height: 300px;
   border-radius: var(--radius);
   overflow: hidden;
   position: relative;
@@ -487,4 +487,12 @@
   .duoGrid {
     grid-template-columns: 1fr;
   }
+}
+
+/* ---- Travel Info vertical list (inside duo card) ---- */
+
+.infoList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }

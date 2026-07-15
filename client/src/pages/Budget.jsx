@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { FaWallet, FaTrash } from "react-icons/fa";
 import api from "../services/api";
 import CurrencyConverter from "../components/CurrencyConverter";
 import styles from "../styles/Budget.module.css";
@@ -47,7 +48,7 @@ function Budget() {
     setError("");
     try {
       await api.post(`/budget/${tripId}`, budgetForm);
-      setSuccess("Budget set! 💰");
+      setSuccess("Budget set!");
       setShowBudgetForm(false);
       fetchBudget();
       setTimeout(() => setSuccess(""), 2000);
@@ -68,7 +69,7 @@ function Budget() {
         amount: parseFloat(expenseForm.amount),
       });
       setExpenseForm({ category: "", amount: "", note: "" });
-      setSuccess("Expense added! ✅");
+      setSuccess("Expense added!");
       fetchBudget();
       setTimeout(() => setSuccess(""), 2000);
     } catch (err) {
@@ -131,7 +132,9 @@ function Budget() {
 
         {!loading && !budgetData && !showBudgetForm && (
           <div className={styles.emptyState}>
-            <span className={styles.emptyIcon}>💰</span>
+            <span className={styles.emptyIcon}>
+              <FaWallet />
+            </span>
             <h3 className={styles.emptyTitle}>No budget set yet</h3>
             <p className={styles.emptyText}>
               Set a budget to start tracking your expenses
@@ -185,7 +188,7 @@ function Budget() {
                 </div>
               </div>
               <button type="submit" className={styles.primaryBtn}>
-                Set Budget 💰
+                <FaWallet className={styles.inlineIcon} /> Set Budget
               </button>
             </form>
           </div>
@@ -328,8 +331,9 @@ function Budget() {
                       <button
                         className={styles.deleteBtn}
                         onClick={() => handleDeleteExpense(exp._id)}
+                        title="Delete expense"
                       >
-                        🗑️
+                        <FaTrash />
                       </button>
                     </div>
                   </div>
@@ -339,6 +343,7 @@ function Budget() {
           </div>
         )}
 
+        {/* Currency converter — below the budget grid */}
         {!loading && (
           <div className={styles.converterWrap}>
             <CurrencyConverter />

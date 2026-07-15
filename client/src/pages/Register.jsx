@@ -1,12 +1,18 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { registerUser } from '../services/authService';
-import styles from '../styles/Auth.module.css';
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { registerUser } from "../services/authService";
+import styles from "../styles/Auth.module.css";
 
 function Register() {
   const navigate = useNavigate();
-  const [form, setForm] = useState({ name: '', email: '', password: '', confirm: '' });
-  const [error, setError] = useState('');
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirm: "",
+  });
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -16,20 +22,25 @@ function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
 
     if (form.password !== form.confirm) {
-      return setError('Passwords do not match');
+      return setError("Passwords do not match");
     }
 
     setLoading(true);
     try {
       const data = await registerUser(form.name, form.email, form.password);
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('user', JSON.stringify({ _id: data._id, name: data.name, email: data.email }));
-      navigate('/dashboard');
+      localStorage.setItem("token", data.token);
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ _id: data._id, name: data.name, email: data.email }),
+      );
+      navigate("/dashboard");
     } catch (err) {
-      setError(err.response?.data?.message || 'Registration failed. Please try again.');
+      setError(
+        err.response?.data?.message || "Registration failed. Please try again.",
+      );
     } finally {
       setLoading(false);
     }
@@ -37,7 +48,6 @@ function Register() {
 
   return (
     <div className={styles.page}>
-
       {/* LEFT — photo panel */}
       <div className={styles.photoPanel}>
         <img
@@ -48,8 +58,8 @@ function Register() {
         <div className={styles.photoOverlay}>
           <h2 className={styles.photoTitle}>Your journey starts here.</h2>
           <p className={styles.photoText}>
-            Join WanderWise and turn dream destinations into real plans — itineraries,
-            budgets, checklists, and more.
+            Join WanderWise and turn dream destinations into real plans —
+            itineraries, budgets, checklists, and more.
           </p>
         </div>
       </div>
@@ -57,14 +67,17 @@ function Register() {
       {/* RIGHT — form panel */}
       <div className={styles.formPanel}>
         <div className={`${styles.card} fadeUp`}>
-
           <div className={styles.logo}>
-            <span className={styles.logoText}>Wander<span className={styles.logoAccent}>Wise</span></span>
+            <span className={styles.logoText}>
+              Wander<span className={styles.logoAccent}>Wise</span>
+            </span>
             <p className={styles.tagline}>roam smart. go far.</p>
           </div>
 
           <h2 className={styles.title}>Create your account</h2>
-          <p className={styles.subtitle}>Start planning your dream trips today</p>
+          <p className={styles.subtitle}>
+            Start planning your dream trips today
+          </p>
 
           {error && <div className={styles.error}>{error}</div>}
 
@@ -99,7 +112,7 @@ function Register() {
               <label className={styles.label}>Password</label>
               <div className={styles.passwordWrap}>
                 <input
-                  type={showPassword ? 'text' : 'password'}
+                  type={showPassword ? "text" : "password"}
                   name="password"
                   value={form.password}
                   onChange={handleChange}
@@ -111,9 +124,9 @@ function Register() {
                   type="button"
                   className={styles.eyeBtn}
                   onClick={() => setShowPassword(!showPassword)}
-                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
                 >
-                  {showPassword ? '🙈' : '👁️'}
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </button>
               </div>
             </div>
@@ -121,7 +134,7 @@ function Register() {
             <div className={styles.field}>
               <label className={styles.label}>Confirm Password</label>
               <input
-                type={showPassword ? 'text' : 'password'}
+                type={showPassword ? "text" : "password"}
                 name="confirm"
                 value={form.confirm}
                 onChange={handleChange}
@@ -132,13 +145,15 @@ function Register() {
             </div>
 
             <button type="submit" className={styles.button} disabled={loading}>
-              {loading ? 'Creating account...' : 'Register'}
+              {loading ? "Creating account..." : "Register"}
             </button>
           </form>
 
           <p className={styles.footer}>
-            Already have an account?{' '}
-            <Link to="/login" className={styles.link}>Login here</Link>
+            Already have an account?{" "}
+            <Link to="/login" className={styles.link}>
+              Login here
+            </Link>
           </p>
         </div>
       </div>

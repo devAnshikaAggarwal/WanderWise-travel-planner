@@ -3,16 +3,40 @@ import { useParams, useNavigate } from "react-router-dom";
 import api from "../services/api";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import {
+  FaMapMarkerAlt,
+  FaCalendarAlt,
+  FaCloudSun,
+  FaGlobe,
+  FaPlane,
+  FaMapMarkedAlt,
+  FaHeart,
+  FaRegHeart,
+  FaShieldAlt,
+  FaAmbulance,
+  FaFire,
+  FaExclamationTriangle,
+  FaWallet,
+  FaClipboardList,
+  FaThumbtack,
+  FaUmbrellaBeach,
+  FaLandmark,
+  FaLeaf,
+  FaMonument,
+  FaMosque,
+  FaMountain,
+  FaCity,
+} from "react-icons/fa";
 import styles from "../styles/DestinationDetail.module.css";
 
-const CLIMATE_EMOJI = {
-  Tropical: "🌴",
-  Mediterranean: "🏛️",
-  Temperate: "⛩️",
-  Arid: "🏰",
-  "Semi-arid": "🕌",
-  Alpine: "🏔️",
-  Desert: "🌆",
+const CLIMATE_ICON = {
+  Tropical: <FaUmbrellaBeach />,
+  Mediterranean: <FaLandmark />,
+  Temperate: <FaLeaf />,
+  Arid: <FaMonument />,
+  "Semi-arid": <FaMosque />,
+  Alpine: <FaMountain />,
+  Desert: <FaCity />,
 };
 
 function DestinationDetail() {
@@ -50,7 +74,6 @@ function DestinationDetail() {
       const res = await api.get(
         `/emergency?country=${encodeURIComponent(country)}`,
       );
-      // API returns an array — take the matching country
       if (Array.isArray(res.data) && res.data.length > 0) {
         setEmergency(res.data[0]);
       }
@@ -102,7 +125,7 @@ function DestinationDetail() {
     try {
       await api.post("/wishlist", { destinationId: id });
       setWishlisted(true);
-      setWishlistMsg("Added to wishlist ❤️");
+      setWishlistMsg("Added to wishlist!");
     } catch (err) {
       setWishlistMsg(err.response?.data?.message || "Login to save wishlist");
     }
@@ -117,6 +140,8 @@ function DestinationDetail() {
       navigate("/trip-planner");
     }
   };
+
+  const telHref = (num) => `tel:${String(num).replace(/[^\d+]/g, "")}`;
 
   if (loading)
     return (
@@ -157,15 +182,21 @@ function DestinationDetail() {
         ) : (
           <div className={styles.heroFallback}>
             <span className={styles.heroEmoji}>
-              {CLIMATE_EMOJI[destination.climate] || "✈️"}
+              {CLIMATE_ICON[destination.climate] || <FaPlane />}
             </span>
           </div>
         )}
         <div className={styles.heroOverlay}>
           <h1 className={styles.heroTitle}>{destination.name}</h1>
-          <p className={styles.heroCountry}>📍 {destination.country}</p>
+          <p className={styles.heroCountry}>
+            <FaMapMarkerAlt className={styles.inlineIcon} />{" "}
+            {destination.country}
+          </p>
           <span className={styles.climateBadge}>
-            {CLIMATE_EMOJI[destination.climate]} {destination.climate}
+            <span className={styles.badgeIcon}>
+              {CLIMATE_ICON[destination.climate]}
+            </span>
+            {destination.climate}
           </span>
         </div>
       </div>
@@ -182,14 +213,15 @@ function DestinationDetail() {
         {wishlistMsg && <div className={styles.wishlistMsg}>{wishlistMsg}</div>}
 
         <div className={styles.grid}>
-          {/* Left — main info */}
+          {/* ============ LEFT — the story, then the practical info ============ */}
           <div className={styles.mainInfo}>
+            {/* 1. What is this place? */}
             <div className={styles.card}>
               <h2 className={styles.cardTitle}>About {destination.name}</h2>
               <p className={styles.description}>{destination.description}</p>
             </div>
 
-            {/* Photo gallery — shows when destination has multiple photos */}
+            {/* 2. What does it look like? */}
             {gallery.length > 1 && (
               <div className={styles.card}>
                 <h2 className={styles.cardTitle}>Gallery</h2>
@@ -214,48 +246,41 @@ function DestinationDetail() {
               </div>
             )}
 
-            <div className={styles.card}>
-              <h2 className={styles.cardTitle}>Travel Info</h2>
-              <div className={styles.infoGrid}>
-                <div className={styles.infoItem}>
-                  <span className={styles.infoIcon}>🗓️</span>
-                  <div>
-                    <p className={styles.infoLabel}>Best time to visit</p>
-                    <p className={styles.infoValue}>{destination.bestTime}</p>
-                  </div>
-                </div>
-                <div className={styles.infoItem}>
-                  <span className={styles.infoIcon}>🌤️</span>
-                  <div>
-                    <p className={styles.infoLabel}>Climate</p>
-                    <p className={styles.infoValue}>{destination.climate}</p>
-                  </div>
-                </div>
-                <div className={styles.infoItem}>
-                  <span className={styles.infoIcon}>🌍</span>
-                  <div>
-                    <p className={styles.infoLabel}>Country</p>
-                    <p className={styles.infoValue}>{destination.country}</p>
-                  </div>
-                </div>
-                {destination.coordinates?.lat && (
+            {/* 3. When should I go? — travel info + live weather together */}
+            <div className={styles.duoGrid}>
+              <div className={styles.card}>
+                <h2 className={styles.cardTitle}>Travel Info</h2>
+                <div className={styles.infoList}>
                   <div className={styles.infoItem}>
-                    <span className={styles.infoIcon}>📌</span>
+                    <span className={styles.infoIcon}>
+                      <FaCalendarAlt />
+                    </span>
                     <div>
-                      <p className={styles.infoLabel}>Coordinates</p>
-                      <p className={styles.infoValue}>
-                        {destination.coordinates.lat}°,{" "}
-                        {destination.coordinates.lng}°
-                      </p>
+                      <p className={styles.infoLabel}>Best time to visit</p>
+                      <p className={styles.infoValue}>{destination.bestTime}</p>
                     </div>
                   </div>
-                )}
+                  <div className={styles.infoItem}>
+                    <span className={styles.infoIcon}>
+                      <FaCloudSun />
+                    </span>
+                    <div>
+                      <p className={styles.infoLabel}>Climate</p>
+                      <p className={styles.infoValue}>{destination.climate}</p>
+                    </div>
+                  </div>
+                  <div className={styles.infoItem}>
+                    <span className={styles.infoIcon}>
+                      <FaGlobe />
+                    </span>
+                    <div>
+                      <p className={styles.infoLabel}>Country</p>
+                      <p className={styles.infoValue}>{destination.country}</p>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
 
-            {/* Weather + Emergency side by side */}
-            <div className={styles.duoGrid}>
-              {/* Weather Card */}
               <div className={styles.card}>
                 <h2 className={styles.cardTitle}>Current Weather</h2>
                 {weatherLoading && (
@@ -310,79 +335,32 @@ function DestinationDetail() {
                   <p className={styles.smallMuted}>Weather unavailable</p>
                 )}
               </div>
-
-              {/* Emergency contacts for this country */}
-              {emergency && (
-                <div className={styles.card}>
-                  <h2 className={styles.cardTitle}>
-                    🚨 Emergency — {emergency.country}
-                  </h2>
-                  <div className={styles.emergencyGrid}>
-                    <a
-                      href={`tel:${String(emergency.policeNo).replace(/[^\d+]/g, "")}`}
-                      className={styles.emergencyItem}
-                    >
-                      <span className={styles.emergencyIcon}>🚔</span>
-                      <div>
-                        <p className={styles.emergencyLabel}>Police</p>
-                        <p className={styles.emergencyValue}>
-                          {emergency.policeNo}
-                        </p>
-                      </div>
-                    </a>
-                    <a
-                      href={`tel:${String(emergency.ambulanceNo).replace(/[^\d+]/g, "")}`}
-                      className={styles.emergencyItem}
-                    >
-                      <span className={styles.emergencyIcon}>🚑</span>
-                      <div>
-                        <p className={styles.emergencyLabel}>Ambulance</p>
-                        <p className={styles.emergencyValue}>
-                          {emergency.ambulanceNo}
-                        </p>
-                      </div>
-                    </a>
-                    <a
-                      href={`tel:${String(emergency.fireNo).replace(/[^\d+]/g, "")}`}
-                      className={styles.emergencyItem}
-                    >
-                      <span className={styles.emergencyIcon}>🔥</span>
-                      <div>
-                        <p className={styles.emergencyLabel}>Fire</p>
-                        <p className={styles.emergencyValue}>
-                          {emergency.fireNo}
-                        </p>
-                      </div>
-                    </a>
-                    <a
-                      href={`tel:${String(emergency.touristHelpline).replace(/[^\d+]/g, "")}`}
-                      className={styles.emergencyItem}
-                    >
-                      <span className={styles.emergencyIcon}>✈️</span>
-                      <div>
-                        <p className={styles.emergencyLabel}>
-                          Tourist Helpline
-                        </p>
-                        <p className={styles.emergencyValue}>
-                          {emergency.touristHelpline}
-                        </p>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              )}
             </div>
+
+            {/* 4. Where is it? — full-width map */}
+            {destination.coordinates?.lat && (
+              <div className={styles.card}>
+                <h2 className={styles.cardTitle}>Location</h2>
+                <div ref={mapRef} className={styles.map} />
+                <p className={styles.mapCoords}>
+                  <FaThumbtack className={styles.inlineIcon} />{" "}
+                  {destination.coordinates.lat}°, {destination.coordinates.lng}°
+                </p>
+              </div>
+            )}
           </div>
 
-          {/* Right — sidebar */}
+          {/* ============ RIGHT — actions, safety, tips ============ */}
           <div className={styles.sidebar}>
+            {/* Actions */}
             <div className={styles.card}>
               <h2 className={styles.cardTitle}>Ready to go?</h2>
               <p className={styles.sidebarText}>
                 Start planning your trip to {destination.name} today.
               </p>
               <button className={styles.planBtn} onClick={handlePlanTrip}>
-                🗺️ Plan a trip here
+                <FaMapMarkedAlt className={styles.inlineIcon} /> Plan a trip
+                here
               </button>
               <button
                 className={
@@ -391,36 +369,113 @@ function DestinationDetail() {
                 onClick={handleWishlist}
                 disabled={wishlisted}
               >
-                {wishlisted ? "❤️ Saved to wishlist" : "🤍 Save to wishlist"}
+                {wishlisted ? (
+                  <>
+                    <FaHeart className={styles.inlineIcon} /> Saved to wishlist
+                  </>
+                ) : (
+                  <>
+                    <FaRegHeart className={styles.inlineIcon} /> Save to
+                    wishlist
+                  </>
+                )}
               </button>
             </div>
 
+            {/* Safety */}
+            {emergency && (
+              <div className={styles.card}>
+                <h2 className={styles.cardTitle}>
+                  <FaExclamationTriangle className={styles.inlineIcon} />{" "}
+                  Emergency — {emergency.country}
+                </h2>
+                <div className={styles.emergencyGrid}>
+                  <a
+                    href={telHref(emergency.policeNo)}
+                    className={styles.emergencyItem}
+                  >
+                    <span className={styles.emergencyIcon}>
+                      <FaShieldAlt />
+                    </span>
+                    <div>
+                      <p className={styles.emergencyLabel}>Police</p>
+                      <p className={styles.emergencyValue}>
+                        {emergency.policeNo}
+                      </p>
+                    </div>
+                  </a>
+                  <a
+                    href={telHref(emergency.ambulanceNo)}
+                    className={styles.emergencyItem}
+                  >
+                    <span className={styles.emergencyIcon}>
+                      <FaAmbulance />
+                    </span>
+                    <div>
+                      <p className={styles.emergencyLabel}>Ambulance</p>
+                      <p className={styles.emergencyValue}>
+                        {emergency.ambulanceNo}
+                      </p>
+                    </div>
+                  </a>
+                  <a
+                    href={telHref(emergency.fireNo)}
+                    className={styles.emergencyItem}
+                  >
+                    <span className={styles.emergencyIcon}>
+                      <FaFire />
+                    </span>
+                    <div>
+                      <p className={styles.emergencyLabel}>Fire</p>
+                      <p className={styles.emergencyValue}>
+                        {emergency.fireNo}
+                      </p>
+                    </div>
+                  </a>
+                  <a
+                    href={telHref(emergency.touristHelpline)}
+                    className={styles.emergencyItem}
+                  >
+                    <span className={styles.emergencyIcon}>
+                      <FaPlane />
+                    </span>
+                    <div>
+                      <p className={styles.emergencyLabel}>Tourist Helpline</p>
+                      <p className={styles.emergencyValue}>
+                        {emergency.touristHelpline}
+                      </p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            )}
+
+            {/* Tips */}
             <div className={styles.card}>
               <h2 className={styles.cardTitle}>Quick tips</h2>
               <ul className={styles.tipsList}>
                 <li className={styles.tip}>
-                  📅 Visit during {destination.bestTime} for best weather
+                  <FaCalendarAlt className={styles.inlineIcon} /> Visit during{" "}
+                  {destination.bestTime} for best weather
                 </li>
                 <li className={styles.tip}>
-                  🌤️ Climate is {destination.climate?.toLowerCase()}
+                  <FaCloudSun className={styles.inlineIcon} /> Climate is{" "}
+                  {destination.climate?.toLowerCase()}
                 </li>
-                <li className={styles.tip}>💰 Set a budget before booking</li>
-                <li className={styles.tip}>📋 Prepare a packing checklist</li>
-                <li className={styles.tip}>🚨 Save local emergency numbers</li>
+                <li className={styles.tip}>
+                  <FaWallet className={styles.inlineIcon} /> Set a budget before
+                  booking
+                </li>
+                <li className={styles.tip}>
+                  <FaClipboardList className={styles.inlineIcon} /> Prepare a
+                  packing checklist
+                </li>
+                <li className={styles.tip}>
+                  <FaExclamationTriangle className={styles.inlineIcon} /> Save
+                  local emergency numbers
+                </li>
               </ul>
             </div>
-
-            {/* Map Card */}
-            {destination.coordinates?.lat && (
-              <div className={styles.card}>
-                <h2 className={styles.cardTitle}>Location</h2>
-                <div ref={mapRef} className={styles.map} />
-                <p className={styles.mapCoords}>
-                  📌 {destination.coordinates.lat}°,{" "}
-                  {destination.coordinates.lng}°
-                </p>
-              </div>
-            )}
           </div>
         </div>
       </div>

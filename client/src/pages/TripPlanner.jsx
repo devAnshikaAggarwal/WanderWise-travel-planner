@@ -1,5 +1,14 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import {
+  FaMapMarkerAlt,
+  FaCalendarAlt,
+  FaWallet,
+  FaClipboardList,
+  FaCheckSquare,
+  FaExclamationTriangle,
+  FaMapMarkedAlt,
+} from "react-icons/fa";
 import api from "../services/api";
 import styles from "../styles/TripPlanner.module.css";
 
@@ -53,7 +62,7 @@ function TripPlanner() {
     setLoading(true);
     try {
       const res = await api.post("/trips", form);
-      setSuccess("Trip created successfully! 🎉");
+      setSuccess("Trip created successfully!");
       setTimeout(() => navigate(`/dashboard`), 1500);
     } catch (err) {
       setError(err.response?.data?.message || "Failed to create trip");
@@ -135,7 +144,8 @@ function TripPlanner() {
                       {selectedDest.name}, {selectedDest.country}
                     </span>
                     <span className={styles.destPreviewMeta}>
-                      🗓️ Best time: {selectedDest.bestTime}
+                      <FaCalendarAlt className={styles.inlineIcon} /> Best time:{" "}
+                      {selectedDest.bestTime}
                     </span>
                   </div>
                 </div>
@@ -169,7 +179,13 @@ function TripPlanner() {
                 className={styles.submitBtn}
                 disabled={loading}
               >
-                {loading ? "Creating trip..." : "🗺️ Create Trip"}
+                {loading ? (
+                  "Creating trip..."
+                ) : (
+                  <>
+                    <FaMapMarkedAlt className={styles.inlineIcon} /> Create Trip
+                  </>
+                )}
               </button>
             </form>
           </div>
@@ -180,18 +196,24 @@ function TripPlanner() {
             <div className={styles.tipsList}>
               {[
                 {
-                  icon: "📍",
+                  icon: <FaMapMarkerAlt />,
                   tip: "Choose a destination from our curated list",
                 },
                 {
-                  icon: "📅",
+                  icon: <FaCalendarAlt />,
                   tip: "Set your travel dates to track the duration",
                 },
-                { icon: "💰", tip: "Add a budget after creating the trip" },
-                { icon: "📋", tip: "Build a day-by-day itinerary" },
-                { icon: "✅", tip: "Create a packing checklist" },
                 {
-                  icon: "🚨",
+                  icon: <FaWallet />,
+                  tip: "Add a budget after creating the trip",
+                },
+                {
+                  icon: <FaClipboardList />,
+                  tip: "Build a day-by-day itinerary",
+                },
+                { icon: <FaCheckSquare />, tip: "Create a packing checklist" },
+                {
+                  icon: <FaExclamationTriangle />,
                   tip: "Check emergency contacts for your destination",
                 },
               ].map((item, i) => (

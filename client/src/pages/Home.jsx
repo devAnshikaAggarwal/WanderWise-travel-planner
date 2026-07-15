@@ -1,5 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {
+  FaPlane,
+  FaSearch,
+  FaMapMarkedAlt,
+  FaWallet,
+  FaHeart,
+  FaCloudSun,
+  FaClipboardList,
+  FaExclamationTriangle,
+} from "react-icons/fa";
 import styles from "../styles/Home.module.css";
 
 function Home() {
@@ -17,32 +27,32 @@ function Home() {
 
   const features = [
     {
-      icon: "🗺️",
+      icon: <FaMapMarkedAlt />,
       title: "Plan Itineraries",
       desc: "Build day-by-day trip plans with ease",
     },
     {
-      icon: "💰",
+      icon: <FaWallet />,
       title: "Track Budget",
       desc: "Monitor spending and stay within budget",
     },
     {
-      icon: "❤️",
+      icon: <FaHeart />,
       title: "Save Wishlist",
       desc: "Save destinations you want to visit",
     },
     {
-      icon: "☁️",
+      icon: <FaCloudSun />,
       title: "Weather Info",
       desc: "Check weather and best time to visit",
     },
     {
-      icon: "📋",
+      icon: <FaClipboardList />,
       title: "Travel Checklist",
       desc: "Never forget essentials with smart lists",
     },
     {
-      icon: "🚨",
+      icon: <FaExclamationTriangle />,
       title: "Emergency Contacts",
       desc: "Stay safe with local emergency numbers",
     },
@@ -81,7 +91,10 @@ function Home() {
       <section className={styles.hero}>
         <div className={styles.heroGlow} />
         <div className={`${styles.heroContent} fadeUp`}>
-          <p className={styles.heroTag}>✈️ Your smart travel companion</p>
+          <p className={styles.heroTag}>
+            <FaPlane className={styles.heroTagIcon} /> Your smart travel
+            companion
+          </p>
           <h1 className={styles.heroTitle}>
             Plan trips smarter.
             <br />
@@ -102,13 +115,13 @@ function Home() {
               className={styles.searchInput}
             />
             <button type="submit" className={styles.searchButton}>
-              Search 🔍
+              Search <FaSearch className={styles.btnIcon} />
             </button>
           </form>
 
           <div className={styles.heroStats}>
             <div className={styles.stat}>
-              <span className={styles.statNum}>8+</span>
+              <span className={styles.statNum}>24+</span>
               <span className={styles.statLabel}>Destinations</span>
             </div>
             <div className={styles.statDivider} />
@@ -118,7 +131,7 @@ function Home() {
             </div>
             <div className={styles.statDivider} />
             <div className={styles.stat}>
-              <span className={styles.statNum}>6+</span>
+              <span className={styles.statNum}>8+</span>
               <span className={styles.statLabel}>Features</span>
             </div>
           </div>

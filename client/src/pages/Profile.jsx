@@ -1,5 +1,13 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import {
+  FaSuitcase,
+  FaHeart,
+  FaMapMarkedAlt,
+  FaSearch,
+  FaExchangeAlt,
+  FaExclamationTriangle,
+} from "react-icons/fa";
 import api from "../services/api";
 import styles from "../styles/Profile.module.css";
 
@@ -110,37 +118,39 @@ function Profile() {
                 className={styles.shortcut}
                 onClick={() => navigate("/dashboard")}
               >
-                🧳 My Trips
+                <FaSuitcase className={styles.inlineIcon} /> My Trips
               </button>
               <button
                 className={styles.shortcut}
                 onClick={() => navigate("/wishlist")}
               >
-                ❤️ My Wishlist
+                <FaHeart className={styles.inlineIcon} /> My Wishlist
               </button>
               <button
                 className={styles.shortcut}
                 onClick={() => navigate("/trip-planner")}
               >
-                🗺️ Plan a new trip
+                <FaMapMarkedAlt className={styles.inlineIcon} /> Plan a new trip
               </button>
               <button
                 className={styles.shortcut}
                 onClick={() => navigate("/destinations")}
               >
-                🔍 Explore destinations
+                <FaSearch className={styles.inlineIcon} /> Explore destinations
               </button>
               <button
                 className={styles.shortcut}
                 onClick={() => navigate("/converter")}
               >
-                💱 Currency converter
+                <FaExchangeAlt className={styles.inlineIcon} /> Currency
+                converter
               </button>
               <button
                 className={styles.shortcut}
                 onClick={() => navigate("/emergency")}
               >
-                🚨 Emergency contacts
+                <FaExclamationTriangle className={styles.inlineIcon} />{" "}
+                Emergency contacts
               </button>
             </div>
           </div>

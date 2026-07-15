@@ -1,28 +1,28 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Breadcrumbs from "./components/Breadcrumbs";
-import Footer from "./components/Footer";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Destinations from "./pages/Destinations";
-import DestinationDetail from "./pages/DestinationDetail";
-import TripPlanner from "./pages/TripPlanner";
-import Itinerary from "./pages/Itinerary";
-import Budget from "./pages/Budget";
-import Wishlist from "./pages/Wishlist";
-import Checklist from "./pages/Checklist";
-import Dashboard from "./pages/Dashboard";
-import Emergency from "./pages/Emergency";
-import Profile from "./pages/Profile";
-import Converter from "./pages/Converter";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Breadcrumbs from './components/Breadcrumbs';
+import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Destinations from './pages/Destinations';
+import DestinationDetail from './pages/DestinationDetail';
+import TripPlanner from './pages/TripPlanner';
+import Itinerary from './pages/Itinerary';
+import Budget from './pages/Budget';
+import Wishlist from './pages/Wishlist';
+import Checklist from './pages/Checklist';
+import Dashboard from './pages/Dashboard';
+import Emergency from './pages/Emergency';
+import Profile from './pages/Profile';
+import Converter from './pages/Converter';
 
 function App() {
   return (
     <BrowserRouter>
-      <div
-        style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
-      >
+      <ScrollToTop />
+      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <Navbar />
         <Breadcrumbs />
         <div style={{ flex: 1 }}>

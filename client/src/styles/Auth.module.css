@@ -258,3 +258,10 @@
     padding: 30px 22px;
   }
 }
+
+/* react-icons eye toggle */
+.eyeBtn {
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+}

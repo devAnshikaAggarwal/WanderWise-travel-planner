@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FaExchangeAlt } from "react-icons/fa";
 import { convertCurrency } from "../services/currencyService";
 import styles from "../styles/CurrencyConverter.module.css";
 
@@ -47,7 +48,9 @@ export default function CurrencyConverter() {
 
   return (
     <div className={styles.card}>
-      <h3 className={styles.title}>💱 Currency Converter</h3>
+      <h3 className={styles.title}>
+        <FaExchangeAlt className={styles.inlineIcon} /> Currency Converter
+      </h3>
       <p className={styles.subtitle}>Live exchange rates for your travels</p>
 
       <div className={styles.row}>
@@ -82,7 +85,7 @@ export default function CurrencyConverter() {
         onClick={handleSwap}
         title="Swap currencies"
       >
-        ⇅ Swap
+        <FaExchangeAlt className={styles.swapIcon} /> Swap
       </button>
 
       <div className={styles.field}>

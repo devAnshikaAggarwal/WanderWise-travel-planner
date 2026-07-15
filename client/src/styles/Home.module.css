@@ -412,3 +412,20 @@
     font-size: 30px;
   }
 }
+
+/* ---- react-icons alignment ---- */
+
+.heroTagIcon {
+  vertical-align: -2px;
+  margin-right: 6px;
+}
+
+.btnIcon {
+  vertical-align: -2px;
+  margin-left: 6px;
+}
+
+.featIcon {
+  color: var(--brand);
+  display: flex;
+}

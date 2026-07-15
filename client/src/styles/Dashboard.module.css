@@ -450,3 +450,32 @@
   background: var(--surface);
   border-color: var(--brand);
 }
+
+/* ---- react-icons alignment ---- */
+
+.inlineIcon {
+  vertical-align: -2px;
+  margin-right: 4px;
+  font-size: 0.95em;
+}
+
+.badgeIcon {
+  vertical-align: -2px;
+  margin-right: 4px;
+}
+
+.quickIcon {
+  color: var(--brand);
+  display: flex;
+}
+
+.emptyIcon {
+  color: var(--accent);
+  display: flex;
+  justify-content: center;
+}
+
+.deleteBtn {
+  display: inline-flex;
+  align-items: center;
+}
