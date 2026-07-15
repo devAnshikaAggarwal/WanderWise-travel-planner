@@ -35,6 +35,10 @@ app.use("/api/emergency", require("./routes/emergencyRoutes"));
 app.use("/api/weather", require("./routes/weatherRoutes"));
 app.use("/api/currency", currencyRoutes);
 
+app.get("/", (req, res) => {
+  res.send("WanderWise API is running 🏔️");
+});
+
 // Start scheduled jobs
 startReminderJob();
 
