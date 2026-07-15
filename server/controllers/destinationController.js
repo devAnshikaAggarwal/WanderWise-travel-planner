@@ -1,4 +1,4 @@
-const Destination = require('../models/Destination');
+const Destination = require("../models/Destination");
 
 // @route GET /api/destinations
 // @desc  Get all destinations, with optional search by name/country
@@ -11,8 +11,8 @@ const getDestinations = async (req, res) => {
     if (search) {
       filter = {
         $or: [
-          { name: { $regex: search, $options: 'i' } },
-          { country: { $regex: search, $options: 'i' } },
+          { name: { $regex: search, $options: "i" } },
+          { country: { $regex: search, $options: "i" } },
         ],
       };
     }
@@ -31,7 +31,7 @@ const getDestinationById = async (req, res) => {
     const destination = await Destination.findById(req.params.id);
 
     if (!destination) {
-      return res.status(404).json({ message: 'Destination not found' });
+      return res.status(404).json({ message: "Destination not found" });
     }
 
     res.json(destination);

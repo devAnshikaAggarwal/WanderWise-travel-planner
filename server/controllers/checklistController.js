@@ -1,5 +1,5 @@
-const Checklist = require('../models/Checklist');
-const Trip = require('../models/Trip');
+const Checklist = require("../models/Checklist");
+const Trip = require("../models/Trip");
 
 const verifyTripOwnership = async (tripId, userId) => {
   return await Trip.findOne({ _id: tripId, userId });
@@ -10,15 +10,16 @@ const verifyTripOwnership = async (tripId, userId) => {
 const addItem = async (req, res) => {
   try {
     const trip = await verifyTripOwnership(req.params.tripId, req.user.id);
-    if (!trip) return res.status(404).json({ message: 'Trip not found' });
+    if (!trip) return res.status(404).json({ message: "Trip not found" });
 
     const { item, category } = req.body;
-    if (!item) return res.status(400).json({ message: 'Item name is required' });
+    if (!item)
+      return res.status(400).json({ message: "Item name is required" });
 
     const checklistItem = await Checklist.create({
       tripId: req.params.tripId,
       item,
-      category: category || 'general',
+      category: category || "general",
     });
 
     res.status(201).json(checklistItem);
@@ -32,9 +33,11 @@ const addItem = async (req, res) => {
 const getChecklist = async (req, res) => {
   try {
     const trip = await verifyTripOwnership(req.params.tripId, req.user.id);
-    if (!trip) return res.status(404).json({ message: 'Trip not found' });
+    if (!trip) return res.status(404).json({ message: "Trip not found" });
 
-    const items = await Checklist.find({ tripId: req.params.tripId }).sort({ category: 1 });
+    const items = await Checklist.find({ tripId: req.params.tripId }).sort({
+      category: 1,
+    });
     res.json(items);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -46,14 +49,15 @@ const getChecklist = async (req, res) => {
 const updateItem = async (req, res) => {
   try {
     const trip = await verifyTripOwnership(req.params.tripId, req.user.id);
-    if (!trip) return res.status(404).json({ message: 'Trip not found' });
+    if (!trip) return res.status(404).json({ message: "Trip not found" });
 
     const checklistItem = await Checklist.findOne({
       _id: req.params.itemId,
       tripId: req.params.tripId,
     });
 
-    if (!checklistItem) return res.status(404).json({ message: 'Item not found' });
+    if (!checklistItem)
+      return res.status(404).json({ message: "Item not found" });
 
     // Toggle checked if not explicitly sent
     if (req.body.checked !== undefined) {
@@ -77,15 +81,15 @@ const updateItem = async (req, res) => {
 const deleteItem = async (req, res) => {
   try {
     const trip = await verifyTripOwnership(req.params.tripId, req.user.id);
-    if (!trip) return res.status(404).json({ message: 'Trip not found' });
+    if (!trip) return res.status(404).json({ message: "Trip not found" });
 
     const item = await Checklist.findOneAndDelete({
       _id: req.params.itemId,
       tripId: req.params.tripId,
     });
 
-    if (!item) return res.status(404).json({ message: 'Item not found' });
-    res.json({ message: 'Item deleted successfully' });
+    if (!item) return res.status(404).json({ message: "Item not found" });
+    res.json({ message: "Item deleted successfully" });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

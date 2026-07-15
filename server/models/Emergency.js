@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const emergencySchema = new mongoose.Schema({
   country: { type: String, required: true, unique: true },
@@ -8,4 +8,4 @@ const emergencySchema = new mongoose.Schema({
   touristHelpline: { type: String },
 });
 
-module.exports = mongoose.model('Emergency', emergencySchema);
+module.exports = mongoose.model("Emergency", emergencySchema);

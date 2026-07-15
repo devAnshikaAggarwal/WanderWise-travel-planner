@@ -1,13 +1,14 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const axios = require('axios');
+const axios = require("axios");
 
 // @route GET /api/weather?city=Paris
 // @desc  Get current weather for a city
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const { city } = req.query;
-    if (!city) return res.status(400).json({ message: 'City name is required' });
+    if (!city)
+      return res.status(400).json({ message: "City name is required" });
 
     const apiKey = process.env.WEATHER_API_KEY;
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
@@ -27,9 +28,9 @@ router.get('/', async (req, res) => {
     });
   } catch (err) {
     if (err.response?.status === 404) {
-      return res.status(404).json({ message: 'City not found' });
+      return res.status(404).json({ message: "City not found" });
     }
-    res.status(500).json({ message: 'Weather fetch failed' });
+    res.status(500).json({ message: "Weather fetch failed" });
   }
 });
 

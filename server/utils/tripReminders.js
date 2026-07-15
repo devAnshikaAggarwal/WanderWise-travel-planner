@@ -1,10 +1,10 @@
-const cron = require('node-cron');
-const Trip = require('../models/Trip');
-const sendEmail = require('./sendEmail');
+const cron = require("node-cron");
+const Trip = require("../models/Trip");
+const sendEmail = require("./sendEmail");
 
 // Runs every day at 8:00 AM server time
 const startReminderJob = () => {
-  cron.schedule('0 8 * * *', async () => {
+  cron.schedule("0 8 * * *", async () => {
     try {
       const now = new Date();
       const threeDaysFromNow = new Date(now);
@@ -15,14 +15,16 @@ const startReminderJob = () => {
         startDate: { $gte: now, $lte: threeDaysFromNow },
         reminderSent: { $ne: true },
       })
-        .populate('userId', 'name email')
-        .populate('destinationId', 'name');
+        .populate("userId", "name email")
+        .populate("destinationId", "name");
 
       for (const trip of trips) {
         if (!trip.userId?.email) continue;
 
         const destinationName = trip.destinationId?.name || trip.title;
-        const daysLeft = Math.ceil((new Date(trip.startDate) - now) / (1000 * 60 * 60 * 24));
+        const daysLeft = Math.ceil(
+          (new Date(trip.startDate) - now) / (1000 * 60 * 60 * 24),
+        );
 
         await sendEmail({
           to: trip.userId.email,
@@ -33,7 +35,7 @@ const startReminderJob = () => {
               <h2 style="color: #3D1A0E;">Hi ${trip.userId.name}! 🌴</h2>
               <p style="color: #993C1D; font-size: 15px;">
                 Your trip <strong>"${trip.title}"</strong> to <strong>${destinationName}</strong> starts in
-                <strong>${daysLeft} day${daysLeft === 1 ? '' : 's'}</strong>!
+                <strong>${daysLeft} day${daysLeft === 1 ? "" : "s"}</strong>!
               </p>
               <p style="color: #993C1D; font-size: 14px;">
                 Don't forget to check your itinerary, budget, and travel checklist before you go.
@@ -51,11 +53,11 @@ const startReminderJob = () => {
 
       if (trips.length) console.log(`📧 Sent ${trips.length} trip reminder(s)`);
     } catch (err) {
-      console.error('Reminder job error:', err.message);
+      console.error("Reminder job error:", err.message);
     }
   });
 
-  console.log('⏰ Trip reminder job scheduled (daily 8:00 AM)');
+  console.log("⏰ Trip reminder job scheduled (daily 8:00 AM)");
 };
 
 module.exports = startReminderJob;

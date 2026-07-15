@@ -1,4 +1,4 @@
-const Emergency = require('../models/Emergency');
+const Emergency = require("../models/Emergency");
 
 // @route GET /api/emergency
 // @desc  Get all emergency contacts, or search by country
@@ -9,7 +9,7 @@ const getEmergencyContacts = async (req, res) => {
 
     let filter = {};
     if (country) {
-      filter = { country: { $regex: country, $options: 'i' } };
+      filter = { country: { $regex: country, $options: "i" } };
     }
 
     const contacts = await Emergency.find(filter).sort({ country: 1 });
@@ -24,7 +24,8 @@ const getEmergencyContacts = async (req, res) => {
 const getEmergencyById = async (req, res) => {
   try {
     const contact = await Emergency.findById(req.params.id);
-    if (!contact) return res.status(404).json({ message: 'Emergency contacts not found' });
+    if (!contact)
+      return res.status(404).json({ message: "Emergency contacts not found" });
     res.json(contact);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -42,4 +43,8 @@ const createEmergencyContact = async (req, res) => {
   }
 };
 
-module.exports = { getEmergencyContacts, getEmergencyById, createEmergencyContact };
+module.exports = {
+  getEmergencyContacts,
+  getEmergencyById,
+  createEmergencyContact,
+};

@@ -1,5 +1,5 @@
-const Itinerary = require('../models/Itinerary');
-const Trip = require('../models/Trip');
+const Itinerary = require("../models/Itinerary");
+const Trip = require("../models/Trip");
 
 const verifyTripOwnership = async (tripId, userId) => {
   return await Trip.findOne({ _id: tripId, userId });
@@ -10,11 +10,13 @@ const verifyTripOwnership = async (tripId, userId) => {
 const addActivity = async (req, res) => {
   try {
     const trip = await verifyTripOwnership(req.params.tripId, req.user.id);
-    if (!trip) return res.status(404).json({ message: 'Trip not found' });
+    if (!trip) return res.status(404).json({ message: "Trip not found" });
 
     const { dayNumber, activity, note, time } = req.body;
     if (!dayNumber || !activity) {
-      return res.status(400).json({ message: 'dayNumber and activity are required' });
+      return res
+        .status(400)
+        .json({ message: "dayNumber and activity are required" });
     }
 
     const item = await Itinerary.create({
@@ -36,9 +38,12 @@ const addActivity = async (req, res) => {
 const getItinerary = async (req, res) => {
   try {
     const trip = await verifyTripOwnership(req.params.tripId, req.user.id);
-    if (!trip) return res.status(404).json({ message: 'Trip not found' });
+    if (!trip) return res.status(404).json({ message: "Trip not found" });
 
-    const items = await Itinerary.find({ tripId: req.params.tripId }).sort({ dayNumber: 1, time: 1 });
+    const items = await Itinerary.find({ tripId: req.params.tripId }).sort({
+      dayNumber: 1,
+      time: 1,
+    });
 
     // Group activities by day number
     const grouped = items.reduce((acc, item) => {
@@ -59,15 +64,15 @@ const getItinerary = async (req, res) => {
 const updateActivity = async (req, res) => {
   try {
     const trip = await verifyTripOwnership(req.params.tripId, req.user.id);
-    if (!trip) return res.status(404).json({ message: 'Trip not found' });
+    if (!trip) return res.status(404).json({ message: "Trip not found" });
 
     const item = await Itinerary.findOneAndUpdate(
       { _id: req.params.activityId, tripId: req.params.tripId },
       { $set: req.body },
-      { new: true }
+      { new: true },
     );
 
-    if (!item) return res.status(404).json({ message: 'Activity not found' });
+    if (!item) return res.status(404).json({ message: "Activity not found" });
     res.json(item);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -79,15 +84,15 @@ const updateActivity = async (req, res) => {
 const deleteActivity = async (req, res) => {
   try {
     const trip = await verifyTripOwnership(req.params.tripId, req.user.id);
-    if (!trip) return res.status(404).json({ message: 'Trip not found' });
+    if (!trip) return res.status(404).json({ message: "Trip not found" });
 
     const item = await Itinerary.findOneAndDelete({
       _id: req.params.activityId,
       tripId: req.params.tripId,
     });
 
-    if (!item) return res.status(404).json({ message: 'Activity not found' });
-    res.json({ message: 'Activity deleted successfully' });
+    if (!item) return res.status(404).json({ message: "Activity not found" });
+    res.json({ message: "Activity deleted successfully" });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
